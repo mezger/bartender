@@ -46,7 +46,14 @@ public class EmoMapperService implements EmoMapper
 		List<IngredientEntity> ingredientEntities = new ArrayList<>();
 		for (WeightedEmotion emotion : sortedEmotions)
 		{
-			ingredientEntities = repository.findByEmotionAndAlcohol(emotion.getEmotion().name(), !noAlcohol);
+			if (noAlcohol)
+			{
+				ingredientEntities = repository.findByEmotionAndAlcohol(emotion.getEmotion().name(), false);
+			}
+			else
+			{
+				ingredientEntities = repository.findByEmotion(emotion.getEmotion().name());
+			}
 			if (!ingredientEntities.isEmpty())
 			{
 				break;

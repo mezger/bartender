@@ -53,6 +53,14 @@ public class EmoMapperServiceTest
 	}
 
 	@Test
+	public void testGetIngredientMultipleEmotionsNoAlc() throws Exception
+	{
+		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), true);
+		System.out.println(result);
+		assertNotNull(result);
+	}
+
+	@Test
 	public void testRepository() throws Exception {
 		assertEquals(160, StreamSupport.stream(repository.findAll().spliterator(), false).count());
 		assertEquals(1, repository.findByShortName("Gin").size());
