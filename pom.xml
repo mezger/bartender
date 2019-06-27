@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.shgruppe</groupId>
-	<artifactId>bartender</artifactId>
+	<groupId>de.shgruppe.bartender</groupId>
+	<artifactId>bartender-pom</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
@@ -11,8 +11,8 @@
 	<description>Hackatron-Projekt Smart Bartender</description>
 
 	<modules>
-		<module>bartender-spring</module>
 		<module>bartender-vue</module>
+		<module>bartender-spring</module>
 	</modules>
 	
 </project>
