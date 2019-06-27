@@ -35,6 +35,7 @@ public class BartenderService
 	public Cocktail getCocktailForImage(MultipartFile picture) throws IOException
 	{
 		byte[] imageBytes = picture.getBytes();
+		log.debug("image-size: {} bytes.", imageBytes.length);
 		RekognitionResult rekognitionResult = rekognitionService.getEmotionsForImage(imageBytes);
 
 		boolean noAlcohol = true;

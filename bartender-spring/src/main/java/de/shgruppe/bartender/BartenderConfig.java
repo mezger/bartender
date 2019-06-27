@@ -19,19 +19,19 @@ public class BartenderConfig
 	private ApplicationContext context;
 
 	@Bean
-	CocktailFinder cocktailFinder(@Value("${cocktailfinder.class}") String qualifier)
+	CocktailFinder cocktailFinder(@Value("${cocktailfinder.class:CocktailFinderMock}") String qualifier)
 	{
 		return (CocktailFinder) context.getBean(qualifier);
 	}
 
 	@Bean
-	EmoMapper emoMapper(@Value("${emomapper.class}") String qualifier)
+	EmoMapper emoMapper(@Value("${emomapper.class:EmoMapperMock}") String qualifier)
 	{
 		return (EmoMapper) context.getBean(qualifier);
 	}
 
 	@Bean
-	RekognitionService rekognitionService(@Value("${rekognitionservice.class}") String qualifier)
+	RekognitionService rekognitionService(@Value("${rekognitionservice.class:RekognitionServiceMock}") String qualifier)
 	{
 		return (RekognitionService) context.getBean(qualifier);
 	}
