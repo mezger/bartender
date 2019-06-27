@@ -1,0 +1,160 @@
+Light_rum;Light rum;CONFUSED;yes
+Applejack;Applejack;SURPRISED;yes
+Gin;Gin;CALM;yes
+Dark_rum;Dark rum;SAD;yes
+Sweet_Vermouth;Sweet Vermouth;DISGUSTED;yes
+Strawberry_schnapps;Strawberry schnapps;HAPPY;yes
+Scotch;Scotch;CALM;yes
+Apricot_brandy;Apricot brandy;CONFUSED;yes
+Triple_sec;Triple sec;SURPRISED;yes
+Southern_Comfort;Southern Comfort;CALM;yes
+Orange_bitters;Orange bitters;SAD;yes
+Brandy;Brandy;DISGUSTED;yes
+Lemon_vodka;Lemon vodka;HAPPY;yes
+Blended_whiskey;Blended whiskey;CALM;yes
+Dry_Vermouth;Dry Vermouth;CONFUSED;yes
+Amaretto;Amaretto;SURPRISED;yes
+Tea;Tea;CALM;no
+Champagne;Champagne;SAD;yes
+Coffee_liqueur;Coffee liqueur;DISGUSTED;yes
+Bourbon;Bourbon;HAPPY;yes
+Tequila;Tequila;CALM;yes
+Vodka;Vodka;CONFUSED;yes
+A\u00f1ejo_rum;A\u00f1ejo rum;SURPRISED;yes
+Bitters;Bitters;CALM;yes
+Sugar;Sugar;SAD;no
+Kahlua;Kahlua;DISGUSTED;yes
+demerara_Sugar;demerara Sugar;HAPPY;no
+Dubonnet_Rouge;Dubonnet Rouge;CALM;yes
+Lime_juice;Lime juice;CONFUSED;no
+Irish_whiskey;Irish whiskey;SURPRISED;yes
+Apple_brandy;Apple brandy;CALM;yes
+Carbonated_water;Carbonated water;SAD;no
+Cherry_brandy;Cherry brandy;DISGUSTED;yes
+Creme_de_Cacao;Creme de Cacao;HAPPY;yes
+Grenadine;Grenadine;CALM;no
+Port;Port;CONFUSED;yes
+Coffee_brandy;Coffee brandy;SURPRISED;yes
+Red_wine;Red wine;CALM;yes
+Rum;Rum;SAD;yes
+Grapefruit_juice;Grapefruit juice;DISGUSTED;no
+Ricard;Ricard;HAPPY;yes
+Sherry;Sherry;CALM;yes
+Cognac;Cognac;CONFUSED;yes
+Sloe_gin;Sloe gin;SURPRISED;yes
+Apple_juice;Apple juice;CALM;no
+Pineapple_juice;Pineapple juice;SAD;no
+Lemon_juice;Lemon juice;DISGUSTED;no
+Sugar_syrup;Sugar syrup;HAPPY;no
+Milk;Milk;CALM;no
+Strawberries;Strawberries;CONFUSED;no
+Chocolate_syrup;Chocolate syrup;SURPRISED;no
+Yoghurt;Yoghurt;CALM;no
+Mango;Mango;SAD;no
+Ginger;Ginger;DISGUSTED;no
+Lime;Lime;HAPPY;no
+Cantaloupe;Cantaloupe;CALM;no
+Berries;Berries;CONFUSED;no
+Grapes;Grapes;SURPRISED;no
+Kiwi;Kiwi;CALM;no
+Tomato_juice;Tomato juice;SAD;no
+Cocoa_powder;Cocoa powder;DISGUSTED;no
+Chocolate;Chocolate;HAPPY;no
+Heavy_cream;Heavy cream;CALM;no
+Galliano;Galliano;CONFUSED;yes
+Peach_Vodka;Peach Vodka;SURPRISED;yes
+Ouzo;Ouzo;CALM;yes
+Coffee;Coffee;SAD;no
+Spiced_rum;Spiced rum;DISGUSTED;yes
+Water;Water;HAPPY;no
+Espresso;Espresso;CALM;no
+Angelica_root;Angelica root;CONFUSED;no
+Orange;Orange;SURPRISED;no
+Cranberries;Cranberries;CALM;no
+Johnnie_Walker;Johnnie Walker;SAD;yes
+Apple_cider;Apple cider;DISGUSTED;yes
+Everclear;Everclear;HAPPY;yes
+Cranberry_juice;Cranberry juice;CALM;no
+Egg_yolk;Egg yolk;CONFUSED;no
+Egg;Egg;SURPRISED;no
+Grape_juice;Grape juice;CALM;no
+Peach_nectar;Peach nectar;SAD;no
+Lemon;Lemon;DISGUSTED;no
+Firewater;Firewater;HAPPY;yes
+Lemonade;Lemonade;CALM;no
+Lager;Lager;CONFUSED;yes
+Whiskey;Whiskey;SURPRISED;yes
+Absolut_Citron;Absolut Citron;CALM;yes
+Pisco;Pisco;SAD;yes
+Irish_cream;Irish cream;DISGUSTED;yes
+Ale;Ale;HAPPY;yes
+Chocolate_liqueur;Chocolate liqueur;CALM;no
+Midori_melon_liqueur;Midori melon liqueur;CONFUSED;no
+Sambuca;Sambuca;SURPRISED;yes
+Cider;Cider;CALM;yes
+Sprite;Sprite;SAD;no
+7-Up;7-Up;DISGUSTED;no
+Blackberry_brandy;Blackberry brandy;HAPPY;yes
+Peppermint_schnapps;Peppermint schnapps;CALM;yes
+Creme_de_Cassis;Creme de Cassis;CONFUSED;yes
+Jack_Daniels;Jack Daniels;SURPRISED;yes
+Bailey's_irish_cream;Bailey's irish cream;CALM;yes
+151_proof_rum;151 proof rum;SAD;yes
+Absolut_Vodka;Absolut Vodka;DISGUSTED;yes
+Goldschlager;Goldschlager;HAPPY;yes
+Crown_Royal;Crown Royal;CALM;yes
+Cointreau;Cointreau;CONFUSED;yes
+Vermouth;Vermouth;SURPRISED;yes
+Advocaat;Advocaat;CALM;yes
+Absolut_Kurant;Absolut Kurant;SAD;yes
+Beer;Beer;DISGUSTED;yes
+Kool-Aid;Kool-Aid;HAPPY;no
+Cherry_Heering;Cherry Heering;CALM;yes
+White_Creme_de_Menthe;White Creme de Menthe;CONFUSED;yes
+Malibu_rum;Malibu rum;SURPRISED;yes
+Vanilla_vodka;Vanilla vodka;CALM;yes
+J\u00e4germeister;J\u00e4germeister;SAD;yes
+Kiwi_liqueur;Kiwi liqueur;DISGUSTED;yes
+Grand_Marnier;Grand Marnier;HAPPY;yes
+Cachaca;Cachaca;CALM;yes
+Peachtree_schnapps;Peachtree schnapps;CONFUSED;yes
+Wild_Turkey;Wild Turkey;SURPRISED;yes
+Cranberry_vodka;Cranberry vodka;CALM;yes
+Corona;Corona;SAD;yes
+Orange_juice;Orange juice;DISGUSTED;no
+Yukon_Jack;Yukon Jack;HAPPY;yes
+Chocolate_ice-cream;Chocolate ice-cream;CALM;no
+Coconut_rum;Coconut rum;CONFUSED;yes
+Banana_liqueur;Banana liqueur;SURPRISED;yes
+Black_Sambuca;Black Sambuca;CALM;yes
+Hot_Damn;Hot Damn;SAD;yes
+Mint;Mint;DISGUSTED;no
+Campari;Campari;HAPPY;yes
+Ice;Ice;CALM;no
+Sour_mix;Sour mix;CONFUSED;no
+Absinthe;Absinthe;SURPRISED;yes
+Whisky;Whisky;CALM;yes
+Guinness_stout;Guinness stout;SAD;yes
+Vanilla_ice-cream;Vanilla ice-cream;DISGUSTED;no
+Chambord_raspberry_liqueur;Chambord raspberry liqueur;HAPPY;yes
+Jim_Beam;Jim Beam;CALM;yes
+Godiva_liqueur;Godiva liqueur;CONFUSED;yes
+Fruit_punch;Fruit punch;SURPRISED;no
+Baileys_irish_cream;Baileys irish cream;CALM;yes
+Zima;Zima;SAD;yes
+Blue_Curacao;Blue Curacao;DISGUSTED;yes
+Coca-Cola;Coca-Cola;HAPPY;no
+Maui;Maui;CALM;no
+Frangelico;Frangelico;CONFUSED;yes
+Bacardi_Limon;Bacardi Limon;SURPRISED;yes
+Raspberry_vodka;Raspberry vodka;CALM;yes
+Green_Creme_de_Menthe;Green Creme de Menthe;SAD;yes
+Lemon_peel;Lemon peel;DISGUSTED;no
+Prosecco;Prosecco;HAPPY;yes
+White_Rum;White Rum;CALM;yes
+Mezcal;Mezcal;CONFUSED;yes
+Green_Chartreuse;Green Chartreuse;SURPRISED;yes
+Grape_Soda;Grape Soda;CALM;no
+Hot_Chocolate;Hot Chocolate;SAD;no
+Blended_Scotch;Blended Scotch;DISGUSTED;yes
+Rye_whiskey;Rye whiskey;HAPPY;yes
