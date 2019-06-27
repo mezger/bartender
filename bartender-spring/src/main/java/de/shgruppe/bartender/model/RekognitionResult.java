@@ -7,6 +7,7 @@ public class RekognitionResult
 {
 	private EnumSet<Emotion> emotions;
 	private int age;
+	private WeightedEmotion weightedEmotion;
 
 
 	public EnumSet<Emotion> getEmotions()
@@ -30,6 +31,14 @@ public class RekognitionResult
 	public void setAge(int age)
 	{
 		this.age = age;
+	}
+
+	public WeightedEmotion getWeightedEmotion() {
+		return weightedEmotion;
+	}
+
+	public void setWeightedEmotion(WeightedEmotion weightedEmotion) {
+		this.weightedEmotion = weightedEmotion;
 	}
 
 }
