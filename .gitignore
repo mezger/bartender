@@ -1,1 +1,7 @@
-/.project
+### Eclipse IDE ###
+.classpath
+.project
+.settings/
+
+### Apache Maven ###
+target/
