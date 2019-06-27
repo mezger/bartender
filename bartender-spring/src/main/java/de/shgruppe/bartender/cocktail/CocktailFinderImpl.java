@@ -24,8 +24,9 @@ public class CocktailFinderImpl implements CocktailFinder
 		JSONObject responseCocktailById = null;
 		if( ingredients.size() > 0)
 		{
+			// 1.) Hole mir eine Liste von DrinkIds mit dieser Zutat
 			RestTemplate restTemplate = new RestTemplate();
-			JSONObject  responsCocktailByIngrdients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0), JSONObject.class);
+			JSONObject  responsCocktailByIngrdients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0).getShortName(), JSONObject.class);
 
 			List<String> listDrinks = new ArrayList<String>();
 			JSONArray array = responsCocktailByIngrdients.getJSONArray("drinks");
@@ -34,6 +35,7 @@ public class CocktailFinderImpl implements CocktailFinder
 				listDrinks.add(array.getJSONObject(i).getString("idDrink"));
 			}
 
+			// 2.) Hole mir eine DrinkId aus der Liste
 			if( listDrinks.size() > 0 )
 			{
 				// Falls sich mehrere DrinkIds in der Liste befinden, wird sich per Zufall eine ID geholt
@@ -51,6 +53,7 @@ public class CocktailFinderImpl implements CocktailFinder
 		Cocktail cocktail = new Cocktail();
 		JSONObject drink = response.getJSONObject("drinks");
 
+		cocktail.setId(drink.getString("idDrink"));
 		cocktail.setName(drink.getString("strDrink"));
 		cocktail.setZubereitung(drink.getString("strInstructions"));
 		cocktail.setImage(drink.getString("strDrinkThumb"));
