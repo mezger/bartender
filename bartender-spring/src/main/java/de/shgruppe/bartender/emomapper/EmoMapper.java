@@ -9,7 +9,7 @@ import de.shgruppe.bartender.model.WeightedEmotion;
 
 public interface EmoMapper
 {
-	public List<Ingredient> getIngredientsForEmotions(EnumSet<Emotion> emotions);
 
 	public Ingredient getIngredientForEmotions(List<WeightedEmotion> emotions, boolean noAlcohol);
+
 }
