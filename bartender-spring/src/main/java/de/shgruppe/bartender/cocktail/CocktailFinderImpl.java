@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import de.shgruppe.bartender.model.Cocktail;
 import de.shgruppe.bartender.model.Ingredient;
 
+@Service
 public class CocktailFinderImpl implements CocktailFinder
 {
 	// private static Logger log = LoggerFactory.getLogger(CocktailFinderImpl.class);
@@ -19,73 +23,68 @@ public class CocktailFinderImpl implements CocktailFinder
 	String cocktailsByCoctailIDURL		= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 	String cocktailsAlcOrNoAlcoholicURL	= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=";
 
-
-	/*ToDo: postProcessAfterInitialization
 	JSONObject responseCocktailsAlcoholic;
 	JSONObject responseCocktailsNonAlcoholic;
-	JSONObject responseCocktailsByIngredient;
 
-	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException
+	@PostConstruct
+	public void initCocktailFinder()
 	{
-		RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate		= new RestTemplate();
 		responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic", JSONObject.class);
 		responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic",		JSONObject.class);
-
-		return bean;
 	}
-	*/
+
 
 	@Override
 	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)
 	{
-		// 1.) Hole mir eine Liste an alkoholischen/nicht alkoholischen Drinks
-		String urlDrinkList = cocktailsAlcOrNoAlcoholicURL;
+		// 1.) Setze die Cocktail-Liste, gefiltert nach alkoholisch oder nicht alkoholischen Drinks
+		JSONObject  jsonCocktailsFilteredByAlcOrNoAlc;
 		if(noAlcohol)
 		{
-			urlDrinkList += "Non_Alcoholic";
+			jsonCocktailsFilteredByAlcOrNoAlc = responseCocktailsNonAlcoholic;
 		}
 		else
 		{
-			urlDrinkList += "Alcoholic";
+			jsonCocktailsFilteredByAlcOrNoAlc = responseCocktailsAlcoholic;
 		}
 
-		RestTemplate restTemplate = new RestTemplate();
-		JSONObject  responseCocktailsAlcOrNoAlc = restTemplate.getForObject(urlDrinkList, JSONObject.class);
-
-		List<String> listDrinksAlcOrNoAlc = new ArrayList<String>();
-		JSONArray arrayDrinksAlcOrNocAlc = responseCocktailsAlcOrNoAlc.getJSONArray("drinks");
-		for(int i = 0 ; i < arrayDrinksAlcOrNocAlc.length() ; i++)
+		// Speichere die Drink-IDs in der Liste
+		List<String> listCocktailsFilteredByAlcNoAlc = new ArrayList<String>();
+		JSONArray arrayCocktailsFilteredByAlcNoAlc = jsonCocktailsFilteredByAlcOrNoAlc.getJSONArray("drinks");
+		for(int i = 0 ; i < arrayCocktailsFilteredByAlcNoAlc.length() ; i++)
 		{
-			listDrinksAlcOrNoAlc.add(arrayDrinksAlcOrNocAlc.getJSONObject(i).getString("idDrink"));
+			listCocktailsFilteredByAlcNoAlc.add(arrayCocktailsFilteredByAlcNoAlc.getJSONObject(i).getString("idDrink"));
 		}
 
 		// 2.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
-		JSONObject responseCocktailById = null;
-		List<String> listDrinksByIngredient = new ArrayList<String>();
+		JSONObject responseCocktailById			= null;
+		RestTemplate restTemplate				= new RestTemplate();
+		List<String> listCocktailsByIngredient	= new ArrayList<String>();
 		if( ingredients.size() > 0)
 		{
 			JSONObject responseCocktailsByIngredients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0).getShortName(), JSONObject.class);
 			JSONArray arrayDrinksByIngridient = responseCocktailsByIngredients.getJSONArray("drinks");
 			for(int i = 0 ; i < arrayDrinksByIngridient.length() ; i++)
 			{
-				listDrinksByIngredient.add(arrayDrinksByIngridient.getJSONObject(i).getString("idDrink"));
+				listCocktailsByIngredient.add(arrayDrinksByIngridient.getJSONObject(i).getString("idDrink"));
 			}
 		}
 
-		// 3.) Hole mir den Drink, welcher in beiden Listen vertreten ist
-		if(    listDrinksAlcOrNoAlc.size() > 0
-			&& listDrinksByIngredient.size() > 0)
+		// 3.) Es wird ein Cocktail geholt, welcher in beiden Listen vertreten ist
+		if(    listCocktailsFilteredByAlcNoAlc.size() > 0
+			&& listCocktailsByIngredient.size() > 0)
 		{
 			// Beide Listen werden durchgemischt, um einen Random Effekt zu erzielen
-			Collections.shuffle(listDrinksAlcOrNoAlc);
-			Collections.shuffle(listDrinksByIngredient);
+			Collections.shuffle(listCocktailsFilteredByAlcNoAlc);
+			Collections.shuffle(listCocktailsByIngredient);
 			String drinkId = "";
 
-			for(int i= 0; i < listDrinksByIngredient.size(); i++)
+			for(int i= 0; i < listCocktailsByIngredient.size(); i++)
 			{
-				if( listDrinksAlcOrNoAlc.contains(listDrinksByIngredient.get(i)) )
+				if( listCocktailsFilteredByAlcNoAlc.contains(listCocktailsByIngredient.get(i)) )
 				{
-					drinkId = listDrinksByIngredient.get(i);
+					drinkId = listCocktailsByIngredient.get(i);
 					break;
 				}
 			}
