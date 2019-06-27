@@ -1,25 +1,12 @@
 package de.shgruppe.bartender.model;
 
-import java.util.EnumSet;
+import java.util.List;
 
 
 public class RekognitionResult
 {
-	private EnumSet<Emotion> emotions;
 	private int age;
-	private WeightedEmotion weightedEmotion;
-
-
-	public EnumSet<Emotion> getEmotions()
-	{
-		return emotions;
-	}
-
-
-	public void setEmotions(EnumSet<Emotion> emotions)
-	{
-		this.emotions = emotions;
-	}
+	private List<WeightedEmotion> emotions;
 
 
 	public int getAge()
@@ -27,18 +14,19 @@ public class RekognitionResult
 		return age;
 	}
 
-
 	public void setAge(int age)
 	{
 		this.age = age;
 	}
 
-	public WeightedEmotion getWeightedEmotion() {
-		return weightedEmotion;
+	public List<WeightedEmotion> getEmotions() {
+		return emotions;
 	}
 
-	public void setWeightedEmotion(WeightedEmotion weightedEmotion) {
-		this.weightedEmotion = weightedEmotion;
+	public void setEmotions(List<WeightedEmotion> emotions) {
+		this.emotions = emotions;
 	}
+
+
 
 }
