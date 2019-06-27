@@ -77,6 +77,5 @@ export default {
       display: none;
     }
     button{
-      wi
     }
 </style>
