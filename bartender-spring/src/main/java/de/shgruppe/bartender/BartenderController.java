@@ -1,19 +1,31 @@
 package de.shgruppe.bartender;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import de.shgruppe.bartender.model.Cocktail;
 
 @RestController
 public class BartenderController
 {
 	private static Logger log = LoggerFactory.getLogger(BartenderController.class);
 
-	@GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String testle()
+	@Autowired
+	private BartenderService bartenderService;
+
+
+	@CrossOrigin(origins = "*")
+	@PostMapping(value="/cocktailForImage")
+	public Cocktail cocktailForImage(@RequestParam(value="picture")MultipartFile picture) throws IOException
 	{
-		return "{testle=ok}";
+		return bartenderService.getCocktailForImage(picture);
 	}
 }
