@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Webcam msg="Bartender - Mache ein Bild von Dir!"/>
-    <Cocktail msg="Bartender - Cocktail passend zu Deiner Stimmung"/>
+    <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
+    <img alt="Vue logo" src="./assets/logo.jpg">
+    <Webcam msg="Mache ein Bild von Dir!"/>
+    <Cocktail msg="Cocktail passend zu Deiner Stimmung"/>
   </div>
 </template>
 
