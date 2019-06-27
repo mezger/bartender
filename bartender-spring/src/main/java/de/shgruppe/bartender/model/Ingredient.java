@@ -2,21 +2,9 @@ package de.shgruppe.bartender.model;
 
 public class Ingredient
 {
-	private int id;
+
 	private String shortName;
 	private String readableName;
-
-
-	public int getId()
-	{
-		return id;
-	}
-
-
-	public void setId(int id)
-	{
-		this.id = id;
-	}
 
 
 	public String getShortName()
