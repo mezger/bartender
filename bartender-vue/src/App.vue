@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Webcam msg="Bartender - Mache ein Bild von Dir!"/>
+    <Cocktail msg="Bartender - Cocktail passend zu Deiner Stimmung"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Webcam from './components/webcam.vue'
+import Cocktail from './components/cocktail.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Webcam,
+    Cocktail
   }
 }
 </script>
