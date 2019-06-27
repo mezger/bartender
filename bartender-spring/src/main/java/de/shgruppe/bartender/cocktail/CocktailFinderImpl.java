@@ -15,8 +15,11 @@ public class CocktailFinderImpl implements CocktailFinder
 {
 	// private static Logger log = LoggerFactory.getLogger(CocktailFinderImpl.class);
 
-	String cocktailsByIngredientsURL	= "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=";
-	String cocktailsByCoctailIDURL		= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?iid=";
+	String cocktailsByIngredientsURL	= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
+	String cocktailsByCoctailIDURL		= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+	String cocktailsAlcoholic			= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic";
+	String cocktailsNonAlcoholic		= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic";
+
 
 	@Override
 	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)

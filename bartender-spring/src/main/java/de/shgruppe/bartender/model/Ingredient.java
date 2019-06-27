@@ -36,4 +36,9 @@ public class Ingredient
 		this.readableName = readableName;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%s - %s", shortName, readableName);
+	}
+
 }
