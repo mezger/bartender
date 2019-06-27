@@ -13,15 +13,18 @@ import com.amazonaws.services.rekognition.model.DetectFacesRequest;
 import com.amazonaws.services.rekognition.model.DetectFacesResult;
 import com.amazonaws.services.rekognition.model.DetectLabelsRequest;
 import com.amazonaws.services.rekognition.model.DetectLabelsResult;
+import com.amazonaws.services.rekognition.model.Emotion;
 import com.amazonaws.services.rekognition.model.FaceDetail;
 import com.amazonaws.services.rekognition.model.Image;
 import com.amazonaws.services.rekognition.model.Label;
 import com.amazonaws.util.IOUtils;
 import de.shgruppe.bartender.model.RekognitionResult;
+import de.shgruppe.bartender.model.WeightedEmotion;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RekognitionServiceImpl implements RekognitionService {
@@ -43,15 +46,8 @@ public class RekognitionServiceImpl implements RekognitionService {
     ByteBuffer imageBytes = null;
     DetectLabelsResult result = null;
     DetectFacesResult faceResult = null;
-    InputStream inputStream = null;
-//    try {
-      //inputStream = new FileInputStream(new File(photo));
-//      imageBytes = ByteBuffer.wrap(IOUtils.toByteArray(picture.getInputStream()));
-//    } catch (FileNotFoundException e) {
-//      e.printStackTrace();
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
+
+    imageBytes = ByteBuffer.wrap(image);
 
     AmazonRekognition rekognitionClient =
         AmazonRekognitionClientBuilder.standard()
@@ -75,7 +71,51 @@ public class RekognitionServiceImpl implements RekognitionService {
       List<Label> labels = result.getLabels();
       List<FaceDetail> faces = faceResult.getFaceDetails();
 
-    return null;
+
+      //Map Response to Rekognition Result
+      RekognitionResult rekognitionResult = new RekognitionResult();
+
+      Integer high = faces.get(0).getAgeRange().getHigh();
+      Integer low = faces.get(0).getAgeRange().getLow();
+      Integer alter = (high + low) / 2;
+
+      List<Emotion> emotions = faces.get(0).getEmotions();
+      List<WeightedEmotion> weightedEmotionsList = new ArrayList<>();
+      for (Emotion emotion : emotions) {
+        WeightedEmotion weightedEmotion = new WeightedEmotion();
+
+        String emotionType = emotion.getType();
+        Float confidence = emotion.getConfidence();
+
+        switch (emotionType) {
+          case "Happy":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.HAPPY);
+            break;
+          case "Surprised":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SURPRISED);
+            break;
+          case "Disgusted":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.DISGUSTED);
+            break;
+          case "Sad":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SAD);
+            break;
+          case "Calm":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CALM);
+            break;
+          case "Angry":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.ANGRY);
+            break;
+          case "confused":
+            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CONFUSED);
+            break;
+        }
+        weightedEmotion.setWeight(confidence);
+      }
+
+      rekognitionResult.setAge(alter);
+
+      return null;
   } catch (AmazonRekognitionException e) {
       e.printStackTrace();
     }
