@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import de.shgruppe.bartender.cocktail.CocktailFinder;
 import de.shgruppe.bartender.emomapper.EmoMapper;
 import de.shgruppe.bartender.rekognition.RekognitionService;
 
 @Configuration
+@PropertySource(value = "classpath:bartender.properties", ignoreResourceNotFound = true)
 public class BartenderConfig
 {
 	@Autowired
