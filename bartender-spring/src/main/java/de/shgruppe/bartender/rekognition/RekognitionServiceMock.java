@@ -13,9 +13,12 @@ public class RekognitionServiceMock implements RekognitionService
 {
 	private static Logger log = LoggerFactory.getLogger(RekognitionServiceMock.class);
 
+
 	@Override
 	public RekognitionResult getEmotionsForImage(byte[] image)
 	{
+		log.warn("RekognitionServiceMock aktiv!");
+
 		RekognitionResult rekognitionResult = new RekognitionResult();
 		return rekognitionResult;
 	}

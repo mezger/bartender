@@ -21,6 +21,8 @@ public class CocktailFinderMock implements CocktailFinder
 	@Override
 	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)
 	{
+		log.warn("CocktailFinderMock aktiv!");
+
 		List<String> cocktailIngredients = new ArrayList<>();
 		cocktailIngredients.add("Tequila");
 		cocktailIngredients.add("Triple sec");

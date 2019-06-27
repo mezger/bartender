@@ -19,6 +19,8 @@ public class EmoMapperMock implements EmoMapper
 	@Override
 	public Ingredient getIngredientForEmotions(List<WeightedEmotion> emotions, boolean noAlcohol)
 	{
+		log.warn("EmoMapperMock aktiv!");
+
 		return new Ingredient("Gin", "Gin");
 	}
 }
