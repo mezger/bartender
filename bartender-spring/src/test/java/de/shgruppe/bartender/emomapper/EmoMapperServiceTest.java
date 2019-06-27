@@ -23,12 +23,6 @@ import de.shgruppe.bartender.model.WeightedEmotion;
 public class EmoMapperServiceTest
 {
 
-//	@MockBean
-//	private RekognitionService rekognitionService;
-//
-//	@MockBean
-//	private CocktailFinder cocktailFinder;
-
 	@Autowired
 	private IngredientRepository repository;
 
@@ -43,9 +37,18 @@ public class EmoMapperServiceTest
 	}
 
 	@Test
-	public void testGetIngredient() throws Exception
+	public void testGetIngredientSimple() throws Exception
 	{
 		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.8)), false);
+		System.out.println(result);
+		assertNotNull(result);
+	}
+
+	@Test
+	public void testGetIngredientMultipleEmotions() throws Exception
+	{
+		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), false);
+		System.out.println(result);
 		assertNotNull(result);
 	}
 
