@@ -9,8 +9,10 @@ import de.shgruppe.bartender.emomapper.entities.IngredientEntity;
 public interface IngredientRepository extends CrudRepository<IngredientEntity, String>
 {
 
-	public List<IngredientEntity> findByEmotion(String emotion);
+	List<IngredientEntity> findByEmotion(String emotion);
 
-	public List<IngredientEntity> findByEmotionAndAlcohol(String emotion, boolean alcohol);
+	List<IngredientEntity> findByEmotionAndAlcohol(String emotion, boolean alcohol);
+
+	List<IngredientEntity> findByShortName(String shortName);
 
 }
