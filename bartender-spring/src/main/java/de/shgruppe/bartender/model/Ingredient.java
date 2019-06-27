@@ -2,9 +2,15 @@ package de.shgruppe.bartender.model;
 
 public class Ingredient
 {
-
 	private String shortName;
 	private String readableName;
+
+
+	public Ingredient(String shortName, String readableName)
+	{
+		this.shortName = shortName;
+		this.readableName = readableName;
+	}
 
 
 	public String getShortName()
