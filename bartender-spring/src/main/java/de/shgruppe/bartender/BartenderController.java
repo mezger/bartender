@@ -23,7 +23,7 @@ public class BartenderController
 
 
 	@CrossOrigin(origins = "*")
-	@PostMapping(value="/cocktailForImage"/*,  consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE*/)
+	@PostMapping(value="/cocktailForImage")
 	public Cocktail cocktailForImage(@RequestParam(value="picture")MultipartFile picture) throws IOException
 	{
 		return bartenderService.getCocktailForImage(picture);

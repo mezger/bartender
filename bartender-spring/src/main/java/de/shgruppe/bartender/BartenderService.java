@@ -1,6 +1,7 @@
 package de.shgruppe.bartender;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -36,13 +37,16 @@ public class BartenderService
 		byte[] imageBytes = picture.getBytes();
 		RekognitionResult rekognitionResult = rekognitionService.getEmotionsForImage(imageBytes);
 
-		List<Ingredient> ingredients = emoMapper.getIngredientsForEmotions(rekognitionResult.getEmotions());
-
 		boolean noAlcohol = true;
 		if(rekognitionResult.getAge()>=18)
 		{
 			noAlcohol = false;
 		}
+
+		Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
+		List<Ingredient> ingredients = new ArrayList<>();
+		ingredients.add(ingredient);
+
 		return cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
 	}
 }

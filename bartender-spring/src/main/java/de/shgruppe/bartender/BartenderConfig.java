@@ -1,18 +1,36 @@
 package de.shgruppe.bartender;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import de.shgruppe.bartender.cocktail.CocktailFinder;
-import de.shgruppe.bartender.cocktail.CocktailFinderMock;
+import de.shgruppe.bartender.emomapper.EmoMapper;
+import de.shgruppe.bartender.rekognition.RekognitionService;
 
 @Configuration
 public class BartenderConfig
 {
+	@Autowired
+	private ApplicationContext context;
+
 	@Bean
-	CocktailFinder cocktailFinder()
+	CocktailFinder cocktailFinder(@Value("${cocktailfinder.class}") String qualifier)
 	{
-		return new CocktailFinderMock();
+		return (CocktailFinder) context.getBean(qualifier);
 	}
 
+	@Bean
+	EmoMapper emoMapper(@Value("${emomapper.class}") String qualifier)
+	{
+		return (EmoMapper) context.getBean(qualifier);
+	}
+
+	@Bean
+	RekognitionService rekognitionService(@Value("${rekognitionservice.class}") String qualifier)
+	{
+		return (RekognitionService) context.getBean(qualifier);
+	}
 }
