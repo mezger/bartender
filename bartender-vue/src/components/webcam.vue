@@ -18,6 +18,7 @@
               <button id="send" v-on:click="sendPicture()">Cocktail ermitteln</button>
             </div>  
           </div>    
+          {{this.output}}
   </div>      
 </template>
 
@@ -31,23 +32,39 @@ export default {
             return {
                 video: {},
                 canvas: {},
-                captures: [],
+                image: {},
+                output: {}
             }
         },
   methods: {
     takePicture() {
         this.canvas = this.$refs.canvas;
         var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
-        this.captures.push(canvas.toDataURL("image/png"));
-        $('#picture').show();
-        $('#record').hide();
+        this.image   = canvas.toBlob(this.sendPicture, "image/jpeg");
+       console.log(this.image);
+        document.getElementById('picture').style.display = "block";
+        document.getElementById('record').style.display = "none";
     },
     activateCam(){
-      $('#record').show();
-      $('#picture').hide();
+      document.getElementById('record').style.display = "block";
+      document.getElementById() ('picture').style.display = "none";
     },
-    sendPicture(){
-      //Bild an Service senden
+    sendPicture(picture){
+                let currentObj = this;
+                const formData = new FormData();
+                formData.append('picture', picture);
+                this.axios({
+                    method: 'post',
+                    url: 'http://localhost:8080/cocktailForImage',
+                    data: formData,
+                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+                })
+                .then(function (response) {
+                    currentObj.output = response.data;
+                })
+                .catch(function (error) {
+                    currentObj.output = error;
+                });
     }
   },
   mounted() {
