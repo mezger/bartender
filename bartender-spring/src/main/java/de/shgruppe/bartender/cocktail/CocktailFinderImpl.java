@@ -53,21 +53,26 @@ public class CocktailFinderImpl implements CocktailFinder
 		Cocktail cocktail = new Cocktail();
 		JSONObject drink = response.getJSONObject("drinks");
 
-		cocktail.setId(drink.getString("idDrink"));
-		cocktail.setName(drink.getString("strDrink"));
-		cocktail.setZubereitung(drink.getString("strInstructions"));
-		cocktail.setImage(drink.getString("strDrinkThumb"));
+		cocktail.setId			(drink.getString("idDrink"));
+		cocktail.setName		(drink.getString("strDrink"));
+		cocktail.setZubereitung	(drink.getString("strInstructions"));
+		cocktail.setImage		(drink.getString("strDrinkThumb"));
 
-		String alkoholisch = drink.getString("strAlcoholic");
-		boolean isDrinkAlcoholic = alkoholisch.equals("Alcoholic");
+		String alkoholisch			= drink.getString("strAlcoholic");
+		boolean isDrinkAlcoholic	= alkoholisch.equals("Alcoholic");
 		cocktail.setAlkoholisch(isDrinkAlcoholic);
 
 		// Es sind maximal 15 Ingredient im JSON-Object vorhanden
 		List<String> listIngredients = new ArrayList<String>();
-		for(int i = 0; i <= 15; i++)
+		for(int i = 1; i <= 15; i++)
 		{
-			listIngredients.add(drink.getString("strIngredient" + i));
+			String ingredient = drink.getString("strIngredient" + i);
+			if( !ingredient.isEmpty())
+			{
+				listIngredients.add(ingredient);
+			}
 		}
+
 		cocktail.setListIngredients(listIngredients);
 
 		return cocktail;
