@@ -2,12 +2,21 @@
   <div>
           <div>{{msg}}</div>
           <div id="record">
-              <video ref="video" id="video" width="640" height="480" autoplay></video>
-              <button id="snap" v-on:click="takePicture()">Foto aufnehmen</button>
+              <div>
+                <video ref="video" id="video" width="640" height="480" autoplay></video>
+              </div>  
+              <div>
+                <button id="snap" v-on:click="takePicture()">Bild aufnehmen</button>
+              </div>
           </div>
-          <div id="foto">
-            <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
-            <button id="record" v-on:click="activateCam()">Neue Aufnahme</button>
+          <div id="picture">
+            <div>
+              <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+            </div>
+            <div> 
+              <button id="record" v-on:click="activateCam()">Neue Aufnahme</button>
+              <button id="send" v-on:click="sendPicture()">Cocktail ermitteln</button>
+            </div>  
           </div>    
   </div>      
 </template>
@@ -30,12 +39,15 @@ export default {
         this.canvas = this.$refs.canvas;
         var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
         this.captures.push(canvas.toDataURL("image/png"));
-        $('#foto').show();
+        $('#picture').show();
         $('#record').hide();
     },
     activateCam(){
       $('#record').show();
-      $('#foto').hide();
+      $('#picture').hide();
+    },
+    sendPicture(){
+      //Bild an Service senden
     }
   },
   mounted() {
@@ -61,14 +73,10 @@ export default {
     #video {
         background-color: #000000;
     }
-    #record {
-
-    }
-    #foto {
+    #picture {
       display: none;
     }
-    li {
-        display: inline;
-        padding: 5px;
+    button{
+      wi
     }
 </style>
