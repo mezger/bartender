@@ -85,7 +85,7 @@ public class CocktailFinderImpl implements CocktailFinder
 			// Falls der User volljaehrig ist, bekommt er entweder alkoholische oder nicht
 			// alkoholische Cocktails
 			listCocktails = listCocktailsNoAlc;
-			listCocktails.addAll(listCocktailsNoAlc);
+			listCocktails.addAll(listCocktailsAlc);
 		}
 
 		// 2.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
