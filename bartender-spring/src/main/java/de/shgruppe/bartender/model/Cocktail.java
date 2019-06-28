@@ -9,6 +9,7 @@ public class Cocktail
 	private String name;
 	private String zubereitung;
 	private String image;
+	private String emotion;
 	private boolean alkoholisch;
 	private List<String> listIngredients;
 	private RekognitionResult rekognitionResult;
@@ -18,13 +19,14 @@ public class Cocktail
 	{}
 
 
-	public Cocktail(String id, String name, String zubereitung, String image, boolean alkoholisch, List<String> listIngredients)
+	public Cocktail(String id, String name, String zubereitung, String image, String emotion, boolean alkoholisch, List<String> listIngredients)
 	{
 		super();
 		this.id = id;
 		this.name = name;
 		this.zubereitung = zubereitung;
 		this.image = image;
+		this.emotion = emotion;
 		this.alkoholisch = alkoholisch;
 		this.listIngredients = listIngredients;
 	}
@@ -111,6 +113,18 @@ public class Cocktail
 	public void setRekognitionResult(RekognitionResult rekognitionResult)
 	{
 		this.rekognitionResult = rekognitionResult;
+	}
+
+
+	public String getEmotion()
+	{
+		return emotion;
+	}
+
+
+	public void setEmotion(String emotion)
+	{
+		this.emotion = emotion;
 	}
 
 }
