@@ -71,47 +71,50 @@ public class RekognitionServiceImpl implements RekognitionService {
 
       //Map Response to Rekognition Result
       RekognitionResult rekognitionResult = new RekognitionResult();
+      
+      if (!faces.isEmpty()) {
+        Integer high = faces.get(0).getAgeRange().getHigh();
+        Integer low = faces.get(0).getAgeRange().getLow();
+        Integer alter = (high + low) / 2;
 
-      Integer high = faces.get(0).getAgeRange().getHigh();
-      Integer low = faces.get(0).getAgeRange().getLow();
-      Integer alter = (high + low) / 2;
+        List<Emotion> emotions = faces.get(0).getEmotions();
+        List<WeightedEmotion> weightedEmotionsList = new ArrayList<>();
+        for (Emotion emotion : emotions) {
+          WeightedEmotion weightedEmotion = new WeightedEmotion();
 
-      List<Emotion> emotions = faces.get(0).getEmotions();
-      List<WeightedEmotion> weightedEmotionsList = new ArrayList<>();
-      for (Emotion emotion : emotions) {
-        WeightedEmotion weightedEmotion = new WeightedEmotion();
-
-        String emotionType = emotion.getType();
-        Float confidence = emotion.getConfidence();
-        switch (emotionType) {
-          case "HAPPY":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.HAPPY);
-            break;
-          case "SURPRISED":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SURPRISED);
-            break;
-          case "DISGUSTED":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.DISGUSTED);
-            break;
-          case "SAD":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SAD);
-            break;
-          case "CALM":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CALM);
-            break;
-          case "ANGRY":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.ANGRY);
-            break;
-          case "CONFUSED":
-            weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CONFUSED);
-            break;
+          String emotionType = emotion.getType();
+          Float confidence = emotion.getConfidence();
+          switch (emotionType) {
+            case "HAPPY":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.HAPPY);
+              break;
+            case "SURPRISED":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SURPRISED);
+              break;
+            case "DISGUSTED":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.DISGUSTED);
+              break;
+            case "SAD":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SAD);
+              break;
+            case "CALM":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CALM);
+              break;
+            case "ANGRY":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.ANGRY);
+              break;
+            case "CONFUSED":
+              weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CONFUSED);
+              break;
+          }
+          weightedEmotion.setWeight(confidence);
+          weightedEmotionsList.add(weightedEmotion);
         }
-        weightedEmotion.setWeight(confidence);
-        weightedEmotionsList.add(weightedEmotion);
-      }
 
-      rekognitionResult.setEmotions(weightedEmotionsList);
-      rekognitionResult.setAge(alter);
+        rekognitionResult.setEmotions(weightedEmotionsList);
+        rekognitionResult.setAge(alter);
+      }
+     
       rekognitionResult.setFaceList(faces);
       rekognitionResult.setLabelList(labels);
 
