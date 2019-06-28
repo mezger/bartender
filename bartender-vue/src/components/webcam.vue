@@ -41,13 +41,12 @@ export default {
         this.canvas = this.$refs.canvas;
         var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
         this.image   = canvas.toBlob(this.sendPicture, "image/jpeg");
-       console.log(this.image);
         document.getElementById('picture').style.display = "block";
         document.getElementById('record').style.display = "none";
     },
     activateCam(){
       document.getElementById('record').style.display = "block";
-      document.getElementById() ('picture').style.display = "none";
+      document.getElementById('picture').style.display = "none";
     },
     sendPicture(picture){
                 let currentObj = this;
