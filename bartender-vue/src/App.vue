@@ -8,7 +8,7 @@
             <Webcam msg="Mache ein Bild von Dir!" @cocktailFound="updateCocktail"/>
           </b-col>  
         <b-col> 
-          <Cocktail msg="Cocktail passend zu Deiner Stimmung" stimmung="fröhlich" v-bind:cocktail="childData"/>
+          <Cocktail msg="Cocktail passend zu Deiner Stimmung" :stimmung="stimmung" v-bind:cocktail="childData" />
         </b-col>  
       </b-row>   
     </b-container>  
@@ -27,11 +27,49 @@ export default {
   },
   data() {
     return {
-      childData: {}
+      childData: {},
+      stimmung: String
     };
   },
   methods: {
     updateCocktail(variable) {
+      debugger;
+      const emotions = variable.rekognitionResult.emotions.sort((a, b)=> {
+         console.log(a.weight + " " + b.weight);
+         if (a.weight< b.weight) {
+          return 1;
+        }
+        if (a.weight > b.weight) {
+          return -1;
+        }
+        return 0;
+      });
+      let stimmung = "nicht analysierbar";
+      switch (emotions[0].emotion) {
+        case "HAPPY":
+          this.stimmung = "glücklich";
+          break;
+        case "SAD":
+          this.stimmung = "traurig";
+          break;
+        case "ANGRY":
+          this.stimmung = "wütend";
+          break;
+        case "CONFUSED":
+          this.stimmung = "verwiirt";
+          break;
+        case "DISGUSTED":
+          this.stimmung = "angewidert";
+          break;
+        case "SURPRISED":
+          this.stimmung = "überrascht";
+          break;
+        case "CALM":
+          this.stimmung = "ruhig";
+          break;
+        default:
+          this.stimmung = "nicht analysierbar";
+      }
       this.childData= variable;
     }
   }
