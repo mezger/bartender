@@ -2,11 +2,8 @@
   <div id="app">
     <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
     <img alt="Vue logo" src="./assets/logo.jpg">
-    <Webcam msg="Mache ein Bild von Dir!"/>
-    <Cocktail msg="Cocktail passend zu Deiner Stimmung" stimmung="fröhlich" v-bind:cocktail="{
-    name: 'Tequilla Sunrise',
-    url: 'https://cocktailbart.de/wp-content/uploads/2016/01/Fotolia_37105328_Subscription_Monthly_M-1024x681.jpg'
-  }"/>
+    <Webcam msg="Mache ein Bild von Dir!" @cocktailFound="updateCocktail"/>
+    <Cocktail msg="Cocktail passend zu Deiner Stimmung" stimmung="fröhlich" v-bind:cocktail="childData"/>
   </div>
 </template>
 
@@ -19,6 +16,16 @@ export default {
   components: {
     Webcam,
     Cocktail
+  },
+  data() {
+    return {
+      childData: {}
+    };
+  },
+  methods: {
+    updateCocktail(variable) {
+      this.childData= variable;
+    }
   }
 }
 </script>

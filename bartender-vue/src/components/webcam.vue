@@ -59,7 +59,8 @@ export default {
                     config: { headers: {'Content-Type': 'multipart/form-data' }}
                 })
                 .then(function (response) {
-                   this.$emit("cocktailFound", response.data);
+                   currentObj.output = response.data;
+                   currentObj.$emit("cocktailFound", response.data);
                 })
                 .catch(function (error) {
                     currentObj.output = error;
