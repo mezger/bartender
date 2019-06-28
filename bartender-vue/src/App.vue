@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     updateCocktail(variable) {
-      debugger;
       const emotions = variable.rekognitionResult.emotions.sort((a, b)=> {
          if (a.weight< b.weight) {
           return 1;
@@ -43,7 +42,7 @@ export default {
         }
         return 0;
       });
-      let stimmung = "nicht analysierbar";
+       this.stimmung = "nicht analysierbar";
       switch (emotions[0].emotion) {
         case "HAPPY":
           this.stimmung = "glücklich";

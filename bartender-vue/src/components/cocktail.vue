@@ -26,8 +26,8 @@ export default {
   name: 'Cocktail',
   props: {
     msg: String,
-    cocktail: {}
-    stimmung: {},
+    cocktail: {},
+    stimmung: {}
 
   }
 }

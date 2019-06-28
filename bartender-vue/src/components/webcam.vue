@@ -16,7 +16,7 @@
               <b-button id="record" variant="primary" v-on:click="activateCam()">Neue Aufnahme</b-button>
             </div>  
           </div>
-          <klapper :data="output" :aufbereiteteDaten="formatedData"></klapper> 
+          <klapper :data="output" :table="tabelle"></klapper> 
   </div>      
 </template>
 
@@ -37,7 +37,7 @@ export default {
                 canvas: {},
                 image: {},
                 output: {},
-                formatedData: {}
+                tabelle:{}
             }
         },
   methods: {
@@ -64,20 +64,23 @@ export default {
                 })
                 .then(function (response) {
                    currentObj.output = response.data;
-                   this.createTable();
                    currentObj.$emit("cocktailFound", response.data);
+                   currentObj.createTable(response.data);
                 })
                 .catch(function (error) {
                     currentObj.output = error;
                 });
     },
-      addToTable(key, value) {
-           this.table.append('<tr><td>'+ key + '</td><td>'+ value + '</td></tr>');
-       },
-       createTable() {
-            const rekognitionResult = this.output.rekognitionResult;
-            this.addToTable('Alter', rekognitionResult.age);
-            this.addToTable('Geschlecht', rekognitionResult.faceList[0].gender.value);     
+       createTable(data) {
+            let rekognitionResult = data.rekognitionResult;
+            this.tabelle.Alter = rekognitionResult.age;
+            this.tabelle.Geschlecht = rekognitionResult.faceList[0].gender.value == "Male" ? "Männlich" : "Weiblich";
+            this.tabelle.Lachen = rekognitionResult.faceList[0].smile.value ? "Ja" : "Nein";
+            this.tabelle.Brille = rekognitionResult.faceList[0].eyeglasses.value ? "Ja" : "Nein";
+            this.tabelle.Augen_offen = rekognitionResult.faceList[0].eyesOpen.value ? "Ja" : "Nein";
+            this.tabelle.Mund_offen = rekognitionResult.faceList[0].mouthOpen.value ? "Ja" : "Nein";
+            this.tabelle.Bart = rekognitionResult.faceList[0].beard.value ? "Ja" : "Nein";
+
        }
   },
   mounted() {

@@ -2,8 +2,10 @@
         <div class="klapper" v-if="data.name"> 
             <b-button  v-b-toggle.collapse-1  variant="secondary" > Das haben wir über dich rausgefunden </b-button > 
             <b-collapse  id = "collapse-1"  class = "mt-2">
-              <table>
-                {{aufbereiteteDaten}}
+              <table id="tabelle">
+                <tr v-for="(value, key) in table" :key="key">
+                    <td class="border">{{key}}</td><td class="border">{{value}}</td>
+                </tr>
               </table> 
               <div class="border">
                 <b-button  v-b-toggle.collapse-2  variant="secondary" >Technische Ansicht</b-button > 
@@ -20,8 +22,7 @@ export default {
   name: 'Klapper',
   props: {
     data: {},
-    table: {},
-    aufbereiteteDaten: {}
+    table: {}
   }
 }
 </script>
@@ -31,5 +32,10 @@ export default {
     }
     .border{
         border: 1px solid black;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 20px;
     }
 </style>
