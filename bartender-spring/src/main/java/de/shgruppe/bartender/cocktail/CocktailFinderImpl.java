@@ -7,7 +7,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +22,7 @@ import de.shgruppe.bartender.model.Ingredient;
 @Lazy
 public class CocktailFinderImpl implements CocktailFinder
 {
-	// private static Logger log = LoggerFactory.getLogger(CocktailFinderImpl.class);
+	private static Logger log = LoggerFactory.getLogger(CocktailFinderImpl.class);
 
 	String cocktailsByIngredientsURL	= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
 	String cocktailsByCoctailIDURL		= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
@@ -36,8 +39,17 @@ public class CocktailFinderImpl implements CocktailFinder
 		String responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic", String.class);
 		String responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic",		String.class);
 
-		jsonCocktailsAlcoholic		= new JSONObject(responseCocktailsAlcoholic);
-		jsonCocktailsNonAlcoholic	= new JSONObject(responseCocktailsNonAlcoholic);
+		try
+		{
+			jsonCocktailsAlcoholic		= new JSONObject(responseCocktailsAlcoholic);
+			jsonCocktailsNonAlcoholic	= new JSONObject(responseCocktailsNonAlcoholic);
+
+			log.info("Alkoholische und nicht-alkoholische wurden geladen.");
+		}
+		catch( JSONException e)
+		{
+			log.warn("Error: Alkoholische und nicht-alkoholische konnten nicht geladen werden. " + e.getMessage());
+		}
 	}
 
 
@@ -70,6 +82,7 @@ public class CocktailFinderImpl implements CocktailFinder
 		if( ingredients.size() > 0)
 		{
 			String responseCocktailsByIngredients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0).getShortName(), String.class);
+			log.info("Drinks anhand der Zutat " + ingredients.get(0).getShortName() + " geladen");
 			JSONObject jsonCocktailsByIngredients = new JSONObject(responseCocktailsByIngredients);
 			JSONArray arrayDrinksByIngridient = jsonCocktailsByIngredients.getJSONArray("drinks");
 			for(int i = 0 ; i < arrayDrinksByIngridient.length() ; i++)
@@ -87,18 +100,23 @@ public class CocktailFinderImpl implements CocktailFinder
 			Collections.shuffle(listCocktailsByIngredient);
 			String drinkId = "";
 
+			boolean foundDrink = false;
+
 			for(int i= 0; i < listCocktailsByIngredient.size(); i++)
 			{
 				if( listCocktailsFilteredByAlcNoAlc.contains(listCocktailsByIngredient.get(i)) )
 				{
 					drinkId = listCocktailsByIngredient.get(i);
+					foundDrink = true;
 					break;
 				}
 			}
 
-			if( !drinkId.isEmpty())
+			if(    foundDrink
+				&& !drinkId.isEmpty())
 			{
 				String responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, String.class);
+				log.info("Konkreten Drink geladen...Convert JSONResponse to Cocktail");
 				jsonCocktailById = new JSONObject(responseCocktailById);
 			}
 		}
@@ -139,6 +157,7 @@ public class CocktailFinderImpl implements CocktailFinder
 			}
 
 			cocktail.setListIngredients(listIngredients);
+			log.info("Cocktail-Ojekt erstellt");
 		}
 
 		return cocktail;
