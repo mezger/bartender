@@ -28,14 +28,13 @@ export default {
   data() {
     return {
       childData: {},
-      stimmung: String
+      stimmung: {}
     };
   },
   methods: {
     updateCocktail(variable) {
       debugger;
       const emotions = variable.rekognitionResult.emotions.sort((a, b)=> {
-         console.log(a.weight + " " + b.weight);
          if (a.weight< b.weight) {
           return 1;
         }
@@ -85,6 +84,7 @@ export default {
   color: #2c3e50;
   margin-top: 0px;
   background-image: url("./assets/strand.jpg");
+  background-repeat: no-repeat;
 }
 h1{
     padding-bottom: 30px;
