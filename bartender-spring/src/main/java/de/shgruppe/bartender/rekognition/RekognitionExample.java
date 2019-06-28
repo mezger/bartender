@@ -22,8 +22,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 
 public class RekognitionExample {
+  
+  @Value("${accesskey}")
+  private String accesskey;
+  @Value("${secretkey}")
+  private String secretkey;
 
   public void test() {
     String photo="Bild/angry.jpg";
@@ -33,8 +39,8 @@ public class RekognitionExample {
         getClass().getClassLoader().getResource("Bild/angry.jpg").getFile()
     );
 
-
-    BasicAWSCredentials credentials = new BasicAWSCredentials("AKIATICD3NPHJKBJVHVT", "Eh2wPhz/8QJmmDJteDVy1uh6Ar5Qq7w3bjNGfiqd");
+    System.out.println(accesskey + " : " + secretkey);
+    BasicAWSCredentials credentials = new BasicAWSCredentials(accesskey, secretkey);
 
     ByteBuffer imageBytes = null;
     try (InputStream inputStream = new FileInputStream(file)) {
