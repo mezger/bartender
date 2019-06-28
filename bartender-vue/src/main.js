@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-
-window.$ = require('jquery')
-window.JQuery = require('jquery')
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+    
+Vue.use(VueAxios, axios, $)
 
 Vue.config.productionTip = false
 
