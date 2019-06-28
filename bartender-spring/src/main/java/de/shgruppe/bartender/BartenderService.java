@@ -45,6 +45,8 @@ public class BartenderService
 		}
 
 		Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
+		log.debug("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
+
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredients.add(ingredient);
 
