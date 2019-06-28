@@ -3,6 +3,7 @@ package de.shgruppe.bartender.cocktail;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 
@@ -36,8 +37,8 @@ public class CocktailFinderImpl implements CocktailFinder
 	{
 		// Listen der alkoholischen / nicht alkoholischen Cocktails wird zum Start geladen und sind die Anwendung über dann verfügbar
 		RestTemplate restTemplate				= new RestTemplate();
-		String responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic", String.class);
-		String responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic",		String.class);
+		String responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic", 		String.class);
+		String responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic",		String.class);
 
 		try
 		{
@@ -123,6 +124,10 @@ public class CocktailFinderImpl implements CocktailFinder
 			else
 			{
 				log.warn("Es wurde kein konkreter Drink anhand den Parametern gefunden");
+				log.info("Es wird ein Random Drink geladen...");
+				Random rand = new Random();
+				String randomDrinkID = listCocktailsFilteredByAlcNoAlc.get(rand.nextInt(listCocktailsFilteredByAlcNoAlc.size()));
+				jsonCocktailById = getDrinkById(randomDrinkID);
 			}
 		}
 
@@ -175,5 +180,25 @@ public class CocktailFinderImpl implements CocktailFinder
 		}
 
 		return cocktail;
+	}
+
+	private JSONObject getDrinkById( String drinkID )
+	{
+		JSONObject jsonDrink = new JSONObject();
+		RestTemplate restTemplate = new RestTemplate();
+		String responseRandomCocktail = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkID, String.class);
+		try
+		{
+			jsonDrink = new JSONObject(responseRandomCocktail);
+
+			log.info("Random Drink wurde geladen");
+		}
+		catch( JSONException e)
+		{
+			log.warn("Random Drink konnte nicht geladen werdne");
+		}
+
+		return jsonDrink;
+
 	}
 }
