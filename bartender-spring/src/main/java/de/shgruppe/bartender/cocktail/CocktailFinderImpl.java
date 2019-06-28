@@ -101,7 +101,6 @@ public class CocktailFinderImpl implements CocktailFinder
 
 		jsonCocktailById = getDrinkById(drinkId);
 
-
 		return convertResponseToCocktail(jsonCocktailById);
 	}
 
