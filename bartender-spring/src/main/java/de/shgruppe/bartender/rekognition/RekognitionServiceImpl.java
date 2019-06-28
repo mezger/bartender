@@ -1,9 +1,7 @@
 package de.shgruppe.bartender.rekognition;
 
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
@@ -17,12 +15,8 @@ import com.amazonaws.services.rekognition.model.Emotion;
 import com.amazonaws.services.rekognition.model.FaceDetail;
 import com.amazonaws.services.rekognition.model.Image;
 import com.amazonaws.services.rekognition.model.Label;
-import com.amazonaws.util.IOUtils;
 import de.shgruppe.bartender.model.RekognitionResult;
 import de.shgruppe.bartender.model.WeightedEmotion;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,28 +26,20 @@ public class RekognitionServiceImpl implements RekognitionService {
   @Override
   public RekognitionResult getEmotionsForImage(byte[] image) {
 
-    AWSCredentials credentials;
-    try {
-      credentials = new ProfileCredentialsProvider("adminuser").getCredentials();
-    } catch (Exception e) {
-      throw new AmazonClientException(
-          "Cannot load the credentials from the credential profiles file. "
-              + "Please make sure that your credentials file is at the correct "
-              + "location (/Users/userid/.aws/credentials), and is in a valid format.",
-          e);
-    }
 
-    ByteBuffer imageBytes = null;
-    DetectLabelsResult result = null;
-    DetectFacesResult faceResult = null;
-
-    imageBytes = ByteBuffer.wrap(image);
-
+    BasicAWSCredentials credentials = new BasicAWSCredentials("AKIATICD3NPHJKBJVHVT", "Eh2wPhz/8QJmmDJteDVy1uh6Ar5Qq7w3bjNGfiqd");
     AmazonRekognition rekognitionClient =
         AmazonRekognitionClientBuilder.standard()
             .withRegion(Regions.EU_WEST_1)
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .build();
+
+
+    ByteBuffer imageBytes = null;
+    DetectFacesResult faceResult = null;
+
+    imageBytes = ByteBuffer.wrap(image);
+
 
     DetectLabelsRequest request =
         new DetectLabelsRequest()
@@ -66,11 +52,11 @@ public class RekognitionServiceImpl implements RekognitionService {
             Attribute.ALL);
 
     try {
-      faceResult = rekognitionClient.detectFaces(facesRequest);
-      result = rekognitionClient.detectLabels(request);
-      List<Label> labels = result.getLabels();
-      List<FaceDetail> faces = faceResult.getFaceDetails();
 
+      DetectLabelsResult result = rekognitionClient.detectLabels(request);
+      List<Label> labels = result.getLabels();
+      faceResult = rekognitionClient.detectFaces(facesRequest);
+      List<FaceDetail> faces = faceResult.getFaceDetails();
 
       //Map Response to Rekognition Result
       RekognitionResult rekognitionResult = new RekognitionResult();
@@ -111,15 +97,24 @@ public class RekognitionServiceImpl implements RekognitionService {
             break;
         }
         weightedEmotion.setWeight(confidence);
+        weightedEmotionsList.add(weightedEmotion);
       }
 
+      rekognitionResult.setEmotions(weightedEmotionsList);
       rekognitionResult.setAge(alter);
 
-      return null;
+      return rekognitionResult;
   } catch (AmazonRekognitionException e) {
       e.printStackTrace();
     }
 
   return null;
   }
+
+//  @Override
+//  public List<FaceDetail> getFaceDetailsForImage(byte[] image) {
+//    return null;
+//  }
+
+
 }
