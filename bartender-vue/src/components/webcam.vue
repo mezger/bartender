@@ -60,7 +60,7 @@ export default {
                     config: { headers: {'Content-Type': 'multipart/form-data' }}
                 })
                 .then(function (response) {
-                    currentObj.output = response.data;
+                   this.$emit("cocktailFound", response.data);
                 })
                 .catch(function (error) {
                     currentObj.output = error;
