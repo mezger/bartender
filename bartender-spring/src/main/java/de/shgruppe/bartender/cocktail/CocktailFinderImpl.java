@@ -134,7 +134,8 @@ public class CocktailFinderImpl implements CocktailFinder
 
 		if( jsonCocktailById != null )
 		{
-			JSONObject drink = jsonCocktailById.getJSONObject("drinks");
+			JSONArray drinks = jsonCocktailById.getJSONArray("drinks");
+			JSONObject drink = drinks.getJSONObject(0);
 
 			cocktail.setId			(drink.getString("idDrink"));
 			cocktail.setName		(drink.getString("strDrink"));
