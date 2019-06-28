@@ -23,15 +23,19 @@ public class CocktailFinderImpl implements CocktailFinder
 	String cocktailsByCoctailIDURL		= "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 	String cocktailsAlcOrNoAlcoholicURL	= "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=";
 
-	JSONObject responseCocktailsAlcoholic;
-	JSONObject responseCocktailsNonAlcoholic;
+	JSONObject jsonCocktailsAlcoholic;
+	JSONObject jsonCocktailsNonAlcoholic;
 
 	@PostConstruct
 	public void initCocktailFinder()
 	{
-		RestTemplate restTemplate		= new RestTemplate();
-		responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic", JSONObject.class);
-		responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic",		JSONObject.class);
+		// Listen der alkoholischen / nicht alkoholischen Cocktails wird zum Start geladen und sind die Anwendung über dann verfügbar
+		RestTemplate restTemplate				= new RestTemplate();
+		String responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic", String.class);
+		String responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic",		String.class);
+
+		jsonCocktailsAlcoholic		= new JSONObject(responseCocktailsAlcoholic);
+		jsonCocktailsNonAlcoholic	= new JSONObject(responseCocktailsNonAlcoholic);
 	}
 
 
@@ -42,11 +46,11 @@ public class CocktailFinderImpl implements CocktailFinder
 		JSONObject  jsonCocktailsFilteredByAlcOrNoAlc;
 		if(noAlcohol)
 		{
-			jsonCocktailsFilteredByAlcOrNoAlc = responseCocktailsNonAlcoholic;
+			jsonCocktailsFilteredByAlcOrNoAlc = jsonCocktailsNonAlcoholic;
 		}
 		else
 		{
-			jsonCocktailsFilteredByAlcOrNoAlc = responseCocktailsAlcoholic;
+			jsonCocktailsFilteredByAlcOrNoAlc = jsonCocktailsAlcoholic;
 		}
 
 		// Speichere die Drink-IDs in der Liste
@@ -58,13 +62,14 @@ public class CocktailFinderImpl implements CocktailFinder
 		}
 
 		// 2.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
-		JSONObject responseCocktailById			= null;
+		JSONObject jsonCocktailById				= null;
 		RestTemplate restTemplate				= new RestTemplate();
 		List<String> listCocktailsByIngredient	= new ArrayList<String>();
 		if( ingredients.size() > 0)
 		{
-			JSONObject responseCocktailsByIngredients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0).getShortName(), JSONObject.class);
-			JSONArray arrayDrinksByIngridient = responseCocktailsByIngredients.getJSONArray("drinks");
+			String responseCocktailsByIngredients = restTemplate.getForObject(cocktailsByIngredientsURL + ingredients.get(0).getShortName(), String.class);
+			JSONObject jsonCocktailsByIngredients = new JSONObject(responseCocktailsByIngredients);
+			JSONArray arrayDrinksByIngridient = jsonCocktailsByIngredients.getJSONArray("drinks");
 			for(int i = 0 ; i < arrayDrinksByIngridient.length() ; i++)
 			{
 				listCocktailsByIngredient.add(arrayDrinksByIngridient.getJSONObject(i).getString("idDrink"));
@@ -91,20 +96,25 @@ public class CocktailFinderImpl implements CocktailFinder
 
 			if( !drinkId.isEmpty())
 			{
-				responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, JSONObject.class);
+				String responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, String.class);
+				jsonCocktailById = new JSONObject(responseCocktailById);
 			}
 		}
 
-		return convertResponseToCocktail(responseCocktailById);
+		return convertResponseToCocktail(jsonCocktailById);
 	}
 
-	private Cocktail convertResponseToCocktail(JSONObject response)
+
+	/**
+	 * Liest aus dem JSOBObject die relevanten Daten und gibt ein Cocktail-Objekt zurück
+	 */
+	private Cocktail convertResponseToCocktail(JSONObject jsonCocktailById)
 	{
 		Cocktail cocktail = new Cocktail();
 
-		if( response != null )
+		if( jsonCocktailById != null )
 		{
-			JSONObject drink = response.getJSONObject("drinks");
+			JSONObject drink = jsonCocktailById.getJSONObject("drinks");
 
 			cocktail.setId			(drink.getString("idDrink"));
 			cocktail.setName		(drink.getString("strDrink"));
