@@ -45,26 +45,15 @@ public class CocktailFinderImpl implements CocktailFinder
 
 		try
 		{
-			JSONObject jsonCocktailsAlcoholic = new JSONObject(responseCocktailsAlcoholic);
-			listCocktailsAlc = new ArrayList<String>();
-			JSONArray arrayCocktailsFilteredByAlc = jsonCocktailsAlcoholic.getJSONArray("drinks");
-			for(int i = 0 ; i < arrayCocktailsFilteredByAlc.length() ; i++)
-			{
-				listCocktailsAlc.add(arrayCocktailsFilteredByAlc.getJSONObject(i).getString("idDrink"));
-			}
+			JSONObject jsonCocktailsAlcoholic		= new JSONObject(responseCocktailsAlcoholic);
+			listCocktailsAlc = getDrinkListWithIds(jsonCocktailsAlcoholic);
 
 			JSONObject jsonCocktailsNonAlcoholic	= new JSONObject(responseCocktailsNonAlcoholic);
+			listCocktailsNoAlc = getDrinkListWithIds(jsonCocktailsNonAlcoholic);
 
-			listCocktailsNoAlc = new ArrayList<String>();
-			JSONArray arrayCocktailsFilteredByNoAlc = jsonCocktailsNonAlcoholic.getJSONArray("drinks");
-			for(int i = 0 ; i < arrayCocktailsFilteredByNoAlc.length() ; i++)
-			{
-				listCocktailsNoAlc.add(arrayCocktailsFilteredByNoAlc.getJSONObject(i).getString("idDrink"));
-			}
-
-			log.info("Alkoholische und nicht-alkoholische wurden geladen.");
+			log.info("Alkoholische und nicht-alkoholische Drinks wurden initial geladen.");
 		}
-		catch( JSONException e)
+		catch(Exception e)
 		{
 			log.warn("Error: Alkoholische und nicht-alkoholische konnten nicht geladen werden. " + e.getMessage());
 		}
@@ -128,14 +117,12 @@ public class CocktailFinderImpl implements CocktailFinder
 				&& !drinkId.isEmpty())
 			{
 				String responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, String.class);
-				log.info("Konkreten Drink geladen: DrinkID: " + drinkId);
-				log.info("...Convert JSONResponse to Cocktail");
 				jsonCocktailById = new JSONObject(responseCocktailById);
+				log.info("Konkreten Drink geladen: DrinkID: " + drinkId);
 			}
 			else
 			{
-				log.warn("Es wurde kein konkreter Drink anhand den Parametern gefunden");
-				log.info("Es wird ein Random Drink geladen...");
+				log.warn("Es wurde kein konkreter Drink anhand den Parametern gefunden. Es wird ein Random Drink geladen.");
 				Random rand = new Random();
 				String randomDrinkID = listCocktails.get(rand.nextInt(listCocktails.size()));
 				jsonCocktailById = getDrinkById(randomDrinkID);
@@ -183,7 +170,7 @@ public class CocktailFinderImpl implements CocktailFinder
 				}
 				catch(Exception e)
 				{
-					log.info("Ingredient " + i + " konnte nicht geladen werden");
+					// Zutat konnte nicht geladen werden
 				}
 			}
 
@@ -194,6 +181,9 @@ public class CocktailFinderImpl implements CocktailFinder
 		return cocktail;
 	}
 
+	/**
+	 * Laedt den Drink von der Cocktail-DB anhand der ID
+	 */
 	private JSONObject getDrinkById( String drinkID )
 	{
 		JSONObject jsonDrink = new JSONObject();
@@ -206,10 +196,25 @@ public class CocktailFinderImpl implements CocktailFinder
 		}
 		catch( JSONException e)
 		{
-			log.warn("Random Drink konnte nicht geladen werdne");
+			log.warn("Random Drink konnte nicht geladen werden");
 		}
 
 		return jsonDrink;
+	}
 
+	/**
+	 * Erstellt aus dem uebergebenen JSON-Objekt mit Drinks eine Liste mit Drink-Ids
+	 */
+	private List<String> getDrinkListWithIds( JSONObject jsonCocktails)
+	{
+		List<String> listDrinkIds = new ArrayList<>();
+		JSONArray arrayDrinks = jsonCocktails.getJSONArray("drinks");
+
+		for(int i = 0 ; i < arrayDrinks.length() ; i++)
+		{
+			listDrinkIds.add(arrayDrinks.getJSONObject(i).getString("idDrink"));
+		}
+
+		return listDrinkIds;
 	}
 }
