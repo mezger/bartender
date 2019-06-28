@@ -42,7 +42,31 @@ export default {
         }
         return 0;
       });
-      this.stimmung = emotions[0].emotion;
+      switch (emotions[0].emotion) {
+        case "HAPPY":
+          this.stimmung = "glücklich";
+          break;
+        case "SAD":
+          this.stimmung = "traurig";
+          break;
+        case "ANGRY":
+          this.stimmung = "wütend";
+          break;
+        case "CONFUSED":
+          this.stimmung = "verwiirt";
+          break;
+        case "DISGUSTED":
+          this.stimmung = "angewidert";
+          break;
+        case "SURPRISED":
+          this.stimmung = "überrascht";
+          break;
+        case "CALM":
+          this.stimmung = "ruhig";
+          break;
+        default:
+          this.stimmung = "nicht analysierbar";
+      }
       this.childData= variable;
     }
   }
