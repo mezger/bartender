@@ -1,7 +1,7 @@
 <template>
   <div v-if="cocktail.name">
-    <h2>{{ msg }}</h2>
-    <p>Nachdem Du gerade {{ stimmung }} bist, empfehlen wir Dir einen {{ cocktail.name }}</p>
+    <h2>Nachdem Du gerade {{ stimmung }} bist, empfehlen wir Dir einen {{ cocktail.name }}</h2>
+    
     <p>
       <img v-bind:src="cocktail.image" v-bind:title="cocktail.name" v-bind:alt="cocktail.name" width="50%"/>
       </p>
