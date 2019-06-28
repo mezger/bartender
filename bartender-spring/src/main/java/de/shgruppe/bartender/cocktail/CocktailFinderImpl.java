@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import de.shgruppe.bartender.model.Cocktail;
 import de.shgruppe.bartender.model.Ingredient;
 
-@Service
+@Service("CocktailFinderImpl")
 @Lazy
 public class CocktailFinderImpl implements CocktailFinder
 {
