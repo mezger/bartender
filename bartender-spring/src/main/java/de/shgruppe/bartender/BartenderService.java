@@ -50,6 +50,7 @@ public class BartenderService
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredients.add(ingredient);
 
-		return cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
+		Cocktail cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
+		return cocktail;
 	}
 }
