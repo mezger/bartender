@@ -39,18 +39,25 @@ public class BartenderService
 		RekognitionResult rekognitionResult = rekognitionService.getEmotionsForImage(imageBytes);
 
 		boolean noAlcohol = true;
-		if(rekognitionResult.getAge()>=18)
+		int alter = rekognitionResult.getAge();
+		if(alter>=18)
 		{
 			noAlcohol = false;
+			log.info("erkanntes Alter {}, alle Cocktails möglich.", alter);
+		}
+		else
+		{
+			log.info("erkanntes Alter {}, nur alkoholfreie Cocktails möglich.", alter);
 		}
 
 		Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
-		log.debug("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
+		log.info("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
 
 		List<Ingredient> ingredients = new ArrayList<>();
 		ingredients.add(ingredient);
 
 		Cocktail cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
+		log.info("CocktailFinder wählte den Cocktail {} aus.", cocktail.getName());
 		cocktail.setRekognitionResult(rekognitionResult);
 
 		return cocktail;
