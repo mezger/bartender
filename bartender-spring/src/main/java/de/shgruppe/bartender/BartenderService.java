@@ -62,6 +62,7 @@ public class BartenderService
 			cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
 			log.info("CocktailFinder wählte den Cocktail {} aus.", cocktail.getName());
 			cocktail.setRekognitionResult(rekognitionResult);
+			cocktail.setEmotion(getEmotion(ingredient.getEmotion()));
 		}
 		catch(Exception e)
 		{
@@ -79,5 +80,46 @@ public class BartenderService
 		}
 
 		return cocktail;
+	}
+
+
+	private String getEmotion(String emoIngredient)
+	{
+		String emotion = "fehlerhaft";
+
+		switch (emoIngredient)
+		{
+			case "HAPPY":
+				emotion = "glücklich";
+				break;
+
+			case "SAD":
+				emotion = "traurig";
+				break;
+
+			case "ANGRY":
+				emotion = "wütend";
+				break;
+
+			case "CONFUSED":
+				emotion = "verwirrt";
+				break;
+
+			case "DISGUSTED":
+				emotion = "angewidert";
+				break;
+
+			case "SURPRISED":
+				emotion = "überrascht";
+				break;
+
+			case "CALM":
+				emotion = "ruhig";
+				break;
+
+			default:
+				emotion = "nicht analysierbar";
+		}
+		return emotion;
 	}
 }
