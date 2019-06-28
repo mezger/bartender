@@ -27,11 +27,13 @@ export default {
   },
   data() {
     return {
-      childData: {}
+      childData: {},
+      stimmung: String
     };
   },
   methods: {
     updateCocktail(variable) {
+      debugger;
       const emotions = variable.rekognitionResult.emotions.sort((a, b)=> {
          console.log(a.weight + " " + b.weight);
          if (a.weight< b.weight) {
@@ -42,6 +44,7 @@ export default {
         }
         return 0;
       });
+      let stimmung = "nicht analysierbar";
       switch (emotions[0].emotion) {
         case "HAPPY":
           this.stimmung = "glücklich";
