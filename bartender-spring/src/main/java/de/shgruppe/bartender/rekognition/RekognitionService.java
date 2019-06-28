@@ -4,5 +4,5 @@ import de.shgruppe.bartender.model.RekognitionResult;
 
 public interface RekognitionService
 {
-	public RekognitionResult getEmotionsForImage(byte[] image);
+	public RekognitionResult getEmotionsForImage(byte[] image) throws Exception;
 }

@@ -35,7 +35,7 @@ public class RekognitionServiceImpl implements RekognitionService {
 
 
   @Override
-  public RekognitionResult getEmotionsForImage(byte[] image) {
+  public RekognitionResult getEmotionsForImage(byte[] image) throws Exception {
 
 
     BasicAWSCredentials credentials = new BasicAWSCredentials(accesskey, secretkey);
@@ -113,11 +113,12 @@ public class RekognitionServiceImpl implements RekognitionService {
 
         rekognitionResult.setEmotions(weightedEmotionsList);
         rekognitionResult.setAge(alter);
+        rekognitionResult.setFaceList(faces);
+        rekognitionResult.setLabelList(labels);
+      } else {
+        throw new Exception("Kein Gesicht erkannt");
       }
      
-      rekognitionResult.setFaceList(faces);
-      rekognitionResult.setLabelList(labels);
-
       return rekognitionResult;
   } catch (AmazonRekognitionException e) {
       e.printStackTrace();
