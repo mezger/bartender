@@ -116,8 +116,13 @@ public class CocktailFinderImpl implements CocktailFinder
 				&& !drinkId.isEmpty())
 			{
 				String responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, String.class);
-				log.info("Konkreten Drink geladen...Convert JSONResponse to Cocktail");
+				log.info("Konkreten Drink geladen: DrinkID: " + drinkId);
+				log.info("...Convert JSONResponse to Cocktail");
 				jsonCocktailById = new JSONObject(responseCocktailById);
+			}
+			else
+			{
+				log.warn("Es wurde kein konkreter Drink anhand den Parametern gefunden");
 			}
 		}
 
@@ -150,10 +155,18 @@ public class CocktailFinderImpl implements CocktailFinder
 			List<String> listIngredients = new ArrayList<String>();
 			for(int i = 1; i <= 15; i++)
 			{
-				String ingredient = drink.getString("strIngredient" + i);
-				if( !ingredient.isEmpty())
+				String ingredient = "";
+				try
 				{
-					listIngredients.add(ingredient);
+					ingredient = drink.getString("strIngredient" + i);
+					if( !ingredient.isEmpty())
+					{
+						listIngredients.add(ingredient);
+					}
+				}
+				catch(Exception e)
+				{
+					log.info("Ingredient " + i + " konnte nicht geladen werden");
 				}
 			}
 
