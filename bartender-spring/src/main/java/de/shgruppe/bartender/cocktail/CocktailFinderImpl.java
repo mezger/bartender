@@ -128,6 +128,7 @@ public class CocktailFinderImpl implements CocktailFinder
 				Random rand = new Random();
 				String randomDrinkID = listCocktailsFilteredByAlcNoAlc.get(rand.nextInt(listCocktailsFilteredByAlcNoAlc.size()));
 				jsonCocktailById = getDrinkById(randomDrinkID);
+
 			}
 		}
 
