@@ -9,9 +9,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import de.shgruppe.bartender.cocktail.CocktailFinderImpl;
 import de.shgruppe.bartender.emomapper.persistence.IngredientRepository;
 import de.shgruppe.bartender.model.Emotion;
 import de.shgruppe.bartender.model.Ingredient;
@@ -22,6 +24,9 @@ import de.shgruppe.bartender.model.WeightedEmotion;
 @TestPropertySource({ "/EmoMapperServiceTest.properties" })
 public class EmoMapperServiceTest
 {
+
+	@MockBean
+	private CocktailFinderImpl cocktailFinder;
 
 	@Autowired
 	private IngredientRepository repository;

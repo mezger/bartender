@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="cocktail.name">
     <h2>{{ msg }}</h2>
     <p>Nachdem Du gerade {{ stimmung }} bist, empfehlen wir Dir einen {{ cocktail.name }}</p>
     <p>

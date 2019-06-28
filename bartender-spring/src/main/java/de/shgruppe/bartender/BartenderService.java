@@ -51,6 +51,8 @@ public class BartenderService
 		ingredients.add(ingredient);
 
 		Cocktail cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
+		cocktail.setRekognitionResult(rekognitionResult);
+
 		return cocktail;
 	}
 }

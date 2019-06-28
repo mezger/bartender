@@ -11,6 +11,8 @@ public class Cocktail
 	private String image;
 	private boolean alkoholisch;
 	private List<String> listIngredients;
+	private RekognitionResult rekognitionResult;
+
 
 	public Cocktail()
 	{}
@@ -97,6 +99,18 @@ public class Cocktail
 	public void setListIngredients(List<String> listIngredients)
 	{
 		this.listIngredients = listIngredients;
+	}
+
+
+	public RekognitionResult getRekognitionResult()
+	{
+		return rekognitionResult;
+	}
+
+
+	public void setRekognitionResult(RekognitionResult rekognitionResult)
+	{
+		this.rekognitionResult = rekognitionResult;
 	}
 
 }
