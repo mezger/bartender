@@ -25,6 +25,7 @@ public class RekognitionServiceMock implements RekognitionService
 		log.warn("RekognitionServiceMock aktiv!");
 
 		RekognitionResult rekognitionResult = new RekognitionResult();
+		rekognitionResult.setAge(23);
 		List<WeightedEmotion> emotions = new ArrayList<>();
 		emotions.add(new WeightedEmotion(Emotion.ANGRY, 99d));
 		emotions.add(new WeightedEmotion(Emotion.CALM, 2d));
