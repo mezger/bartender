@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +16,7 @@ import de.shgruppe.bartender.model.Cocktail;
 import de.shgruppe.bartender.model.Ingredient;
 
 @Service
+@Lazy
 public class CocktailFinderImpl implements CocktailFinder
 {
 	// private static Logger log = LoggerFactory.getLogger(CocktailFinderImpl.class);
