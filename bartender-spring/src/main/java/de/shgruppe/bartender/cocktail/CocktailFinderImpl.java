@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import de.shgruppe.bartender.model.Cocktail;
-import de.shgruppe.bartender.model.Ingredient;
+import de.shgruppe.bartender.model.EmotionalIngredient;
 
 
 @Service("CocktailFinderImpl")
@@ -61,7 +61,7 @@ public class CocktailFinderImpl implements CocktailFinder
 
 
 	@Override
-	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)
+	public Cocktail getCocktailForIngredients(List<EmotionalIngredient> ingredients, boolean noAlcohol)
 	{
 		// 1.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
 		JSONObject jsonCocktailById	= null;

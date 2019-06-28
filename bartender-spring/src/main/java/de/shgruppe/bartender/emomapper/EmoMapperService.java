@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import de.shgruppe.bartender.emomapper.entities.IngredientEntity;
 import de.shgruppe.bartender.emomapper.persistence.IngredientRepository;
 import de.shgruppe.bartender.emomapper.persistence.RepoInitializer;
-import de.shgruppe.bartender.model.Ingredient;
+import de.shgruppe.bartender.model.EmotionalIngredient;
 import de.shgruppe.bartender.model.WeightedEmotion;
 
 @Service("EmoMapperService")
@@ -40,7 +40,7 @@ public class EmoMapperService implements EmoMapper
 	}
 
 	@Override
-	public Ingredient getIngredientForEmotions(List<WeightedEmotion> emotions, boolean noAlcohol)
+	public EmotionalIngredient getIngredientForEmotions(List<WeightedEmotion> emotions, boolean noAlcohol)
 	{
 		List<WeightedEmotion> sortedEmotions = sortEmotions(emotions);
 		List<IngredientEntity> ingredientEntities = new ArrayList<>();
@@ -66,7 +66,7 @@ public class EmoMapperService implements EmoMapper
 		int selectedIndex = new Random().nextInt(ingredientEntities.size());
 		IngredientEntity entity = ingredientEntities.get(selectedIndex);
 		LOG.info(String.format("Found ingredient '%s' for emotion '%s'", entity.getReadableName(), entity.getEmotion()));
-		return new Ingredient(entity.getShortName(), entity.getReadableName());
+		return new EmotionalIngredient(entity.getShortName(), entity.getReadableName(), entity.getEmotion());
 	}
 
 	private static List<WeightedEmotion> sortEmotions(List<WeightedEmotion> emotions) {

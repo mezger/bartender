@@ -1,15 +1,17 @@
 package de.shgruppe.bartender.model;
 
-public class Ingredient
+public class EmotionalIngredient
 {
 	private String shortName;
 	private String readableName;
+	private String emotion;
 
 
-	public Ingredient(String shortName, String readableName)
+	public EmotionalIngredient(String shortName, String readableName, String emotion)
 	{
 		this.shortName = shortName;
 		this.readableName = readableName;
+		this.emotion = emotion;
 	}
 
 
@@ -39,6 +41,16 @@ public class Ingredient
 	@Override
 	public String toString() {
 		return String.format("%s - %s", shortName, readableName);
+	}
+
+
+	public String getEmotion() {
+		return emotion;
+	}
+
+
+	public void setEmotion(String emotion) {
+		this.emotion = emotion;
 	}
 
 }

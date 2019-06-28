@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import de.shgruppe.bartender.model.Cocktail;
-import de.shgruppe.bartender.model.Ingredient;
+import de.shgruppe.bartender.model.EmotionalIngredient;
 
 @Component("CocktailFinderMock")
 @Lazy
@@ -19,7 +19,7 @@ public class CocktailFinderMock implements CocktailFinder
 
 
 	@Override
-	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)
+	public Cocktail getCocktailForIngredients(List<EmotionalIngredient> ingredients, boolean noAlcohol)
 	{
 		log.warn("CocktailFinderMock aktiv!");
 

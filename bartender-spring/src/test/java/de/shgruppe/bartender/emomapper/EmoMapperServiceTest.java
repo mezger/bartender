@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import de.shgruppe.bartender.cocktail.CocktailFinderImpl;
 import de.shgruppe.bartender.emomapper.persistence.IngredientRepository;
 import de.shgruppe.bartender.model.Emotion;
-import de.shgruppe.bartender.model.Ingredient;
+import de.shgruppe.bartender.model.EmotionalIngredient;
 import de.shgruppe.bartender.model.WeightedEmotion;
 
 @RunWith(SpringRunner.class)
@@ -44,7 +44,7 @@ public class EmoMapperServiceTest
 	@Test
 	public void testGetIngredientSimple() throws Exception
 	{
-		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.8)), false);
+		EmotionalIngredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.8)), false);
 		System.out.println(result);
 		assertNotNull(result);
 	}
@@ -52,7 +52,7 @@ public class EmoMapperServiceTest
 	@Test
 	public void testGetIngredientMultipleEmotions() throws Exception
 	{
-		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), false);
+		EmotionalIngredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), false);
 		System.out.println(result);
 		assertNotNull(result);
 	}
@@ -60,7 +60,7 @@ public class EmoMapperServiceTest
 	@Test
 	public void testGetIngredientMultipleEmotionsNoAlc() throws Exception
 	{
-		Ingredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), true);
+		EmotionalIngredient result = emoMapper.getIngredientForEmotions(Arrays.asList(new WeightedEmotion(Emotion.ANGRY, 0.3), new WeightedEmotion(Emotion.SURPRISED, 0.7)), true);
 		System.out.println(result);
 		assertNotNull(result);
 	}

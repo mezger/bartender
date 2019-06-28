@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import de.shgruppe.bartender.cocktail.CocktailFinder;
 import de.shgruppe.bartender.emomapper.EmoMapper;
 import de.shgruppe.bartender.model.Cocktail;
-import de.shgruppe.bartender.model.Ingredient;
+import de.shgruppe.bartender.model.EmotionalIngredient;
 import de.shgruppe.bartender.model.RekognitionResult;
 import de.shgruppe.bartender.rekognition.RekognitionService;
 
@@ -53,10 +53,10 @@ public class BartenderService
 				log.info("erkanntes Alter {}, nur alkoholfreie Cocktails möglich.", alter);
 			}
 
-			Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
+			EmotionalIngredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
 			log.info("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
 
-			List<Ingredient> ingredients = new ArrayList<>();
+			List<EmotionalIngredient> ingredients = new ArrayList<>();
 			ingredients.add(ingredient);
 
 			cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
