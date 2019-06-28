@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import de.shgruppe.bartender.cocktail.CocktailFinder;
 import de.shgruppe.bartender.emomapper.EmoMapper;
@@ -32,5 +33,11 @@ public class BartenderConfig
 	RekognitionService rekognitionService(@Value("${rekognitionservice.class:RekognitionServiceMock}") String qualifier)
 	{
 		return (RekognitionService) context.getBean(qualifier);
+	}
+
+	@Bean
+	RestTemplate restTemplate()
+	{
+		return new RestTemplate();
 	}
 }
