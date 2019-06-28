@@ -1,6 +1,6 @@
 <template>
   <div v-if="cocktail.name">
-    <p class="result">Nachdem Du gerade<br><strong>{{ stimmung }}</strong><br>bist,
+    <p class="result">Nachdem Du gerade<br><strong>{{ cocktail.emotion }}</strong><br>bist,
     </p>
     <p class="result">
       empfehlen wir Dir einen
@@ -33,7 +33,6 @@ export default {
     msg: String,
     cocktail: {},
     stimmung: {}
-
   }
 }
 </script>
