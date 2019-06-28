@@ -83,7 +83,6 @@ public class RekognitionServiceImpl implements RekognitionService {
 
         String emotionType = emotion.getType();
         Float confidence = emotion.getConfidence();
-        System.out.println(emotionType);
         switch (emotionType) {
           case "HAPPY":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.HAPPY);
@@ -113,6 +112,8 @@ public class RekognitionServiceImpl implements RekognitionService {
 
       rekognitionResult.setEmotions(weightedEmotionsList);
       rekognitionResult.setAge(alter);
+      rekognitionResult.setFaceList(faces);
+      rekognitionResult.setLabelList(labels);
 
       return rekognitionResult;
   } catch (AmazonRekognitionException e) {
@@ -121,11 +122,4 @@ public class RekognitionServiceImpl implements RekognitionService {
 
   return null;
   }
-
-//  @Override
-//  public List<FaceDetail> getFaceDetailsForImage(byte[] image) {
-//    return null;
-//  }
-
-
 }
