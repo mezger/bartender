@@ -40,22 +40,18 @@ public class CocktailFinderImpl implements CocktailFinder
 	public void initCocktailFinder()
 	{
 		// Listen der alkoholischen / nicht alkoholischen Cocktails wird zum Start geladen und sind die Anwendung über dann verfügbar
-		String responseCocktailsAlcoholic		= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Alcoholic", 		String.class);
 		String responseCocktailsNonAlcoholic	= restTemplate.getForObject(cocktailsAlcOrNoAlcoholicURL + "Non_Alcoholic",		String.class);
 
 		try
 		{
-			JSONObject jsonCocktailsAlcoholic		= new JSONObject(responseCocktailsAlcoholic);
-			listCocktailsAlc = getDrinkListWithIds(jsonCocktailsAlcoholic);
-
 			JSONObject jsonCocktailsNonAlcoholic	= new JSONObject(responseCocktailsNonAlcoholic);
 			listCocktailsNoAlc = getDrinkListWithIds(jsonCocktailsNonAlcoholic);
 
-			log.info("Alkoholische und nicht-alkoholische Drinks wurden initial geladen.");
+			log.info("Nicht-alkoholische Drinks wurden initial geladen.");
 		}
 		catch(Exception e)
 		{
-			log.warn("Error: Alkoholische und nicht-alkoholische konnten nicht geladen werden. " + e.getMessage());
+			log.warn("Nicht-alkoholische konnten nicht geladen werden. " + e.getMessage());
 		}
 	}
 
@@ -63,21 +59,7 @@ public class CocktailFinderImpl implements CocktailFinder
 	@Override
 	public Cocktail getCocktailForIngredients(List<Ingredient> ingredients, boolean noAlcohol)
 	{
-		// 1.) Setze die Cocktail-Liste, gefiltert nach alkoholisch oder nicht alkoholischen Drinks
-		List<String> listCocktails;
-		if(noAlcohol)
-		{
-			listCocktails = listCocktailsNoAlc;
-		}
-		else
-		{
-			// Falls der User volljaehrig ist, bekommt er entweder alkoholische oder nicht
-			// alkoholische Cocktails
-			listCocktails = listCocktailsNoAlc;
-			listCocktails.addAll(listCocktailsAlc);
-		}
-
-		// 2.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
+		// 1.) Hole mir eine Liste von DrinkIds mit der übergebenen Zutat
 		JSONObject jsonCocktailById				= null;
 		List<String> listCocktailsByIngredient	= new ArrayList<String>();
 		if( ingredients.size() > 0)
@@ -92,20 +74,16 @@ public class CocktailFinderImpl implements CocktailFinder
 			}
 		}
 
-		// 3.) Es wird ein Cocktail geholt, welcher in beiden Listen vertreten ist
-		if(    listCocktails.size() > 0
-			&& listCocktailsByIngredient.size() > 0)
-		{
-			// Beide Listen werden durchgemischt, um einen Random Effekt zu erzielen
-			Collections.shuffle(listCocktails);
-			Collections.shuffle(listCocktailsByIngredient);
-			String drinkId = "";
+		Collections.shuffle(listCocktailsByIngredient);
+		String drinkId = listCocktailsByIngredient.get(0);
 
+		if( noAlcohol)
+		{
 			boolean foundDrink = false;
 
 			for(int i= 0; i < listCocktailsByIngredient.size(); i++)
 			{
-				if( listCocktails.contains(listCocktailsByIngredient.get(i)) )
+				if( listCocktailsNoAlc.contains(listCocktailsByIngredient.get(i)) )
 				{
 					drinkId = listCocktailsByIngredient.get(i);
 					foundDrink = true;
@@ -113,22 +91,16 @@ public class CocktailFinderImpl implements CocktailFinder
 				}
 			}
 
-			if(    foundDrink
-				&& !drinkId.isEmpty())
-			{
-				String responseCocktailById = restTemplate.getForObject(cocktailsByCoctailIDURL + drinkId, String.class);
-				jsonCocktailById = new JSONObject(responseCocktailById);
-				log.info("Konkreten Drink geladen: DrinkID: " + drinkId);
-			}
-			else
+			if( !foundDrink)
 			{
 				log.warn("Es wurde kein konkreter Drink anhand den Parametern gefunden. Es wird ein Random Drink geladen.");
 				Random rand = new Random();
-				String randomDrinkID = listCocktails.get(rand.nextInt(listCocktails.size()));
-				jsonCocktailById = getDrinkById(randomDrinkID);
-
+				drinkId = listCocktailsNoAlc.get(rand.nextInt(listCocktailsNoAlc.size()));
 			}
 		}
+
+		jsonCocktailById = getDrinkById(drinkId);
+
 
 		return convertResponseToCocktail(jsonCocktailById);
 	}
@@ -192,11 +164,11 @@ public class CocktailFinderImpl implements CocktailFinder
 		{
 			jsonDrink = new JSONObject(responseRandomCocktail);
 
-			log.info("Random Drink wurde geladen");
+			log.info("Drink {} wurde geladen", drinkID);
 		}
 		catch( JSONException e)
 		{
-			log.warn("Random Drink konnte nicht geladen werden");
+			log.warn("Drink {} konnte nicht geladen werden", drinkID);
 		}
 
 		return jsonDrink;
