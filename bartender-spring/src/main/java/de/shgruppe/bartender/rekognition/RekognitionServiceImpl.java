@@ -20,14 +20,25 @@ import de.shgruppe.bartender.model.WeightedEmotion;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 
+@Service("RekognitionServiceImpl")
+@Lazy
 public class RekognitionServiceImpl implements RekognitionService {
+
+  @Value("${accesskey}")
+  private String accesskey;
+  @Value("${secretkey}")
+  private String secretkey;
+
 
   @Override
   public RekognitionResult getEmotionsForImage(byte[] image) {
 
 
-    BasicAWSCredentials credentials = new BasicAWSCredentials("AKIATICD3NPHJKBJVHVT", "Eh2wPhz/8QJmmDJteDVy1uh6Ar5Qq7w3bjNGfiqd");
+    BasicAWSCredentials credentials = new BasicAWSCredentials(accesskey, secretkey);
     AmazonRekognition rekognitionClient =
         AmazonRekognitionClientBuilder.standard()
             .withRegion(Regions.EU_WEST_1)
@@ -72,27 +83,27 @@ public class RekognitionServiceImpl implements RekognitionService {
 
         String emotionType = emotion.getType();
         Float confidence = emotion.getConfidence();
-
+        System.out.println(emotionType);
         switch (emotionType) {
-          case "Happy":
+          case "HAPPY":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.HAPPY);
             break;
-          case "Surprised":
+          case "SURPRISED":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SURPRISED);
             break;
-          case "Disgusted":
+          case "DISGUSTED":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.DISGUSTED);
             break;
-          case "Sad":
+          case "SAD":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.SAD);
             break;
-          case "Calm":
+          case "CALM":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CALM);
             break;
-          case "Angry":
+          case "ANGRY":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.ANGRY);
             break;
-          case "confused":
+          case "CONFUSED":
             weightedEmotion.setEmotion(de.shgruppe.bartender.model.Emotion.CONFUSED);
             break;
         }

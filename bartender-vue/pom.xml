@@ -14,8 +14,29 @@
     <frontend-maven-plugin.version>1.7.5</frontend-maven-plugin.version>
   </properties>
 
-  <build>
+  <build>  
     <plugins>
+    <plugin>
+      <artifactId>maven-resources-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>copy Vue.js frontend content</id>
+          <phase>generate-resources</phase>
+          <goals>
+            <goal>copy-resources</goal>
+          </goals>
+          <configuration>
+            <outputDirectory>src/main/resources/public</outputDirectory>
+            <overwrite>true</overwrite>
+            <resources>
+              <resource>
+                <directory>${project.basedir}/dist</directory>
+              </resource>
+            </resources>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>

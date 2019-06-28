@@ -27,7 +27,7 @@ public class RepoInitializer
 	{
 		LOG.info("Init Ingredients Repository from file: " + fileName);
 		repository.deleteAll();
-		CSVParser csvParser = CSVParser.parse(RepoInitializer.class.getResourceAsStream(fileName), Charset.forName("UTF-8"), CSVFormat.DEFAULT.withDelimiter(';'));
+		CSVParser csvParser = CSVParser.parse(RepoInitializer.class.getClassLoader().getResourceAsStream(fileName), Charset.forName("UTF-8"), CSVFormat.DEFAULT.withDelimiter(';'));
 		csvParser.forEach(entry -> processRow(entry, repository));
 	}
 
@@ -35,11 +35,12 @@ public class RepoInitializer
 	private static void processRow(CSVRecord entry, IngredientRepository repository) {
 		try
 		{
-		repository.save(new IngredientEntity(
-				entry.get(0),
-				entry.get(1),
-				entry.get(2),
-				HAS_ALCOHOL.equalsIgnoreCase(entry.get(3))));
+			LOG.debug("Add Ingredient '" + entry.get(0) + "'");
+			repository.save(new IngredientEntity(
+					entry.get(0),
+					entry.get(1),
+					entry.get(2),
+					HAS_ALCOHOL.equalsIgnoreCase(entry.get(3))));
 		}
 		catch (Exception e)
 		{
