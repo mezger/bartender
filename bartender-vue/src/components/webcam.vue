@@ -1,12 +1,11 @@
 <template>
-  <div>
-          <div>{{msg}}</div>
+  <div class="webcam-component">
           <div id="record">
               <div>
                 <video ref="video" id="video" width="640" height="480" autoplay></video>
               </div>  
               <div>
-                <button id="snap" v-on:click="takePicture()">Bild aufnehmen</button>
+                <b-button id="snap" v-on:click="takePicture()">Mache ein Bild von dir!</b-button>
               </div>
           </div>
           <div id="picture">
@@ -14,8 +13,7 @@
               <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
             </div>
             <div> 
-              <button id="record" v-on:click="activateCam()">Neue Aufnahme</button>
-              <button id="send" v-on:click="sendPicture()">Cocktail ermitteln</button>
+              <b-button id="record" v-on:click="activateCam()">Neue Aufnahme</b-button>
             </div>  
           </div>    
           {{this.output}}
@@ -39,8 +37,8 @@ export default {
   methods: {
     takePicture() {
         this.canvas = this.$refs.canvas;
-        var context = this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
-        this.image   = canvas.toBlob(this.sendPicture, "image/jpeg");
+        this.canvas.getContext("2d").drawImage(this.video, 0, 0, 640, 480);
+        this.image   = this.canvas.toBlob(this.sendPicture, "image/jpeg");
         document.getElementById('picture').style.display = "block";
         document.getElementById('record').style.display = "none";
     },
@@ -79,20 +77,16 @@ export default {
 }
 </script>
 <style>
-    body: {
-        background-color: #F0F0F0;
-    }
-    #app {
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
     #video {
         background-color: #000000;
     }
     #picture {
       display: none;
     }
-    button{
+    div .btn{
+      font-size: 1.5rem;
+    }
+    #newPicture{
+      background-color: #777272;
     }
 </style>
