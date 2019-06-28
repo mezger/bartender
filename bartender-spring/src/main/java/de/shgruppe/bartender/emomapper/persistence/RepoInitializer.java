@@ -1,6 +1,5 @@
 package de.shgruppe.bartender.emomapper.persistence;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -29,7 +28,6 @@ public class RepoInitializer
 		LOG.info("Init Ingredients Repository from file: " + fileName);
 		repository.deleteAll();
 		CSVParser csvParser = CSVParser.parse(RepoInitializer.class.getResourceAsStream(fileName), Charset.forName("UTF-8"), CSVFormat.DEFAULT.withDelimiter(';'));
-//		CSVParser csvParser = CSVParser.parse(new File(fileName), Charset.forName("UTF-8"), CSVFormat.DEFAULT.withDelimiter(';'));
 		csvParser.forEach(entry -> processRow(entry, repository));
 	}
 
