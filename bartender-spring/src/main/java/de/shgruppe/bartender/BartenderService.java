@@ -34,31 +34,48 @@ public class BartenderService
 
 	public Cocktail getCocktailForImage(MultipartFile picture) throws IOException
 	{
-		byte[] imageBytes = picture.getBytes();
-		log.debug("image-size: {} bytes.", imageBytes.length);
-		RekognitionResult rekognitionResult = rekognitionService.getEmotionsForImage(imageBytes);
-
-		boolean noAlcohol = true;
-		int alter = rekognitionResult.getAge();
-		if(alter>=18)
+		Cocktail cocktail;
+		try
 		{
-			noAlcohol = false;
-			log.info("erkanntes Alter {}, alle Cocktails möglich.", alter);
+			byte[] imageBytes = picture.getBytes();
+			log.debug("image-size: {} bytes.", imageBytes.length);
+			RekognitionResult rekognitionResult = rekognitionService.getEmotionsForImage(imageBytes);
+
+			boolean noAlcohol = true;
+			int alter = rekognitionResult.getAge();
+			if(alter>=18)
+			{
+				noAlcohol = false;
+				log.info("erkanntes Alter {}, alle Cocktails möglich.", alter);
+			}
+			else
+			{
+				log.info("erkanntes Alter {}, nur alkoholfreie Cocktails möglich.", alter);
+			}
+
+			Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
+			log.info("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
+
+			List<Ingredient> ingredients = new ArrayList<>();
+			ingredients.add(ingredient);
+
+			cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
+			log.info("CocktailFinder wählte den Cocktail {} aus.", cocktail.getName());
+			cocktail.setRekognitionResult(rekognitionResult);
 		}
-		else
+		catch(Exception e)
 		{
-			log.info("erkanntes Alter {}, nur alkoholfreie Cocktails möglich.", alter);
+			log.error(e.getMessage(), e);
+
+			List<String> cocktailIngredients = new ArrayList<>();
+			cocktailIngredients.add("Milk");
+			cocktail = new Cocktail("42666",
+				"Mocktail",
+				"Oooops! Hier ist was schiefgelaufen. Zur Beruhigung gibt es erst mal ein Glas Milch.",
+				"https://alimentazionesportiva.it/wp-content/uploads/2018/05/quante-calorie-in-un-bicchiere-di-latte.jpg",
+				false,
+				cocktailIngredients);
 		}
-
-		Ingredient ingredient = emoMapper.getIngredientForEmotions(rekognitionResult.getEmotions(), noAlcohol);
-		log.info("EmoMapper wählte die Zutat {} aus.",ingredient.getReadableName());
-
-		List<Ingredient> ingredients = new ArrayList<>();
-		ingredients.add(ingredient);
-
-		Cocktail cocktail = cocktailFinder.getCocktailForIngredients(ingredients, noAlcohol);
-		log.info("CocktailFinder wählte den Cocktail {} aus.", cocktail.getName());
-		cocktail.setRekognitionResult(rekognitionResult);
 
 		return cocktail;
 	}
