@@ -10,7 +10,9 @@
               <div class="border">
                 <b-button  v-b-toggle.collapse-2  variant="secondary" >Technische Ansicht</b-button > 
                     <b-collapse  id = "collapse-2"  class = "mt-2"> 
-                        {{data}}
+                      <div class="json">
+                        <pre>{{ data | pretty }}</pre>
+                      </div>
                     </b-collapse > 
                </div>     
             </b-collapse > 
@@ -23,6 +25,11 @@ export default {
   props: {
     data: {},
     table: {}
+  },
+  filters: {
+    pretty: function(value) {
+      return JSON.stringify(value, null, 2);
+    }
   }
 }
 </script>
@@ -37,5 +44,11 @@ export default {
         width: 100%;
         border-collapse: collapse;
         font-size: 20px;
+    }
+    .json {
+      text-align: left;
+    }
+    .json pre {
+      white-space: pre-wrap;
     }
 </style>
