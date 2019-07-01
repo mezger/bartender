@@ -11,13 +11,18 @@
     <p class="result">
       <strong>{{ cocktail.name }}</strong>
     </p>
-    <p class="result" style="font-weight: bold; text-align:">Ingredients</p>
-    <ul class="result" v-for="ingredient in cocktail.listIngredients">
-      <li>{{ingredient}}</li>
-    </ul>
-    <p class="result">
-      {{cocktail.zubereitung}}
-    </p>
+    <div class="klapper">
+      <b-button  v-b-toggle.collapse-cocktail  variant="secondary">Zubereitung </b-button >
+      <b-collapse  id = "collapse-cocktail"  class = "mt-2">
+        <p class="result" style="font-weight: bold; text-align: center">Ingredients</p>
+        <ul class="result" v-for="ingredient in cocktail.listIngredients">
+          <li>{{ingredient}}</li>
+        </ul>
+        <p class="result">
+          {{cocktail.zubereitung}}
+        </p>
+      </b-collapse >
+    </div >
   </div>
 </template>
 
@@ -40,5 +45,9 @@ export default {
 .result strong {
   font-size: 2em;
 }
+#collapse-cocktail{
+  background-color: #fff;
+}
+
 </style>
 
