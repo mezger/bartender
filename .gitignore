@@ -1,1 +1,9 @@
-bartender-vue/node_modules/
+
+### Eclipse IDE ###
+.classpath
+.project
+.settings/
+
+### Apache Maven ###
+target/
+
