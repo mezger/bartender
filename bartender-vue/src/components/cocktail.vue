@@ -15,7 +15,7 @@
       <b-button  v-b-toggle.collapse-cocktail  variant="secondary">Zubereitung </b-button >
       <b-collapse  id = "collapse-cocktail"  class = "mt-2">
         <p class="result" style="font-weight: bold; text-align: center">Ingredients</p>
-        <ul class="result" v-for="ingredient in cocktail.listIngredients">
+        <ul class="result" v-for="ingredient in cocktail.listIngredients" :key="ingredient">
           <li>{{ingredient}}</li>
         </ul>
         <p class="result">
