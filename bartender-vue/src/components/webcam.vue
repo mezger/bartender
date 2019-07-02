@@ -6,6 +6,8 @@
               </div>  
               <div>
                 <b-button id="snap" variant="primary" v-on:click="takePicture()">Mache ein Bild von dir!</b-button>
+              <br>
+              <span class="dsgvo">Mit Deinem Klick akzeptierst Du unsere Datenschutzbestimmungen</span>
               </div>
           </div>
           <div id="picture">
@@ -51,6 +53,9 @@ export default {
     activateCam(){
       document.getElementById('record').style.display = "block";
       document.getElementById('picture').style.display = "none";
+      let currentObj = this;
+      currentObj.$emit("cocktailFound", {namne: null});
+      currentObj.output = {name: null};
     },
     sendPicture(picture){
                 let currentObj = this;
@@ -107,5 +112,9 @@ export default {
     }
     #newPicture{
       background-color: #777272;
+    }
+    .dsgvo{
+      color: white;
+      text-shadow: 3px 3px 4px black;
     }
 </style>

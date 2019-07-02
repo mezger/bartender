@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import Webcam from "./components/webcam.vue";
-import Cocktail from "./components/cocktail.vue";
+import Webcam from './components/webcam.vue';
+import Cocktail from './components/cocktail.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Webcam,
     Cocktail

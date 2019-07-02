@@ -74,7 +74,7 @@ public class BartenderService
 				"Mocktail",
 				"Oooops! Hier ist was schiefgelaufen. Zur Beruhigung gibt es erst mal ein Glas Milch.",
 				"https://alimentazionesportiva.it/wp-content/uploads/2018/05/quante-calorie-in-un-bicchiere-di-latte.jpg",
-				"fehlerhaft",
+				"nicht analysierbar",
 				false,
 				cocktailIngredients);
 		}
