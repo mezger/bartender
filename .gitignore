@@ -7,3 +7,5 @@
 ### Apache Maven ###
 target/
 
+.idea/
+startscript.bat

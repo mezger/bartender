@@ -1,13 +1,17 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
       <b-row>
-        <!--<img alt="Vue logo" src="./assets/strand.jpg"> -->
         <b-col>
+         <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
+        </b-col>
+      </b-row>
+      <b-row class="content">
+        <!--<img alt="Vue logo" src="./assets/strand.jpg"> -->
+        <b-col xs="12" lg="6">
           <Webcam msg="Mache ein Bild von Dir!" @cocktailFound="updateCocktail"/>
         </b-col>
-        <b-col>
+        <b-col xs="12" lg="6">
           <Cocktail msg="Cocktail passend zu Deiner Stimmung" v-bind:cocktail="childData"/>
         </b-col>
       </b-row>
@@ -47,8 +51,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  background-image: url("./assets/strand.jpg");
-  background-repeat: no-repeat;
 }
 h1 {
   padding-bottom: 30px;
@@ -58,4 +60,11 @@ h1 {
 .container-fluid {
   padding-bottom: 10%;
 }
+.content{
+  background-image: url("./assets/strand.jpg");
+  background-repeat: no-repeat;
+}
+  .content > .col-lg-6{
+    padding-top: 15px;
+  }
 </style>
