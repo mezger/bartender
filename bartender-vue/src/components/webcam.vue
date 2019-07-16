@@ -68,7 +68,7 @@
                 formData.append('picture', picture);
                 this.axios({
                     method: 'post',
-                    url: 'http://localhost:8080/cocktailForImage',
+                    url: 'https://bartender.bohni.net/cocktailForImage',
                     data: formData,
                     config: {headers: {'Content-Type': 'multipart/form-data'}}
                 })
