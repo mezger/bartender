@@ -34,7 +34,7 @@ public class CocktailFinderImplAfterWork implements CocktailFinder {
 		XmlMapper xmlMapper = new XmlMapper();
 		Cocktails xmlCocktails = xmlMapper.readValue( CocktailFinderImplAfterWork.class.getClassLoader().getResourceAsStream(fileName), Cocktails.class);
 		xmlCocktails.forEach(cocktail -> cocktail.getListIngredients().forEach(ingredient -> this.cocktails.add(ingredient, cocktail)));
-		logger.info("Initialized CocktailDB with %s cocktails.", cocktails.size());
+		logger.info(String.format("Initialized CocktailDB with %s cocktails.", cocktails.size()));
 	}
 
 	@Override
