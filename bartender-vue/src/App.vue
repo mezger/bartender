@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <img id="logo" src="assets/Logo_Hackathon.png">
+          <img id="logo" src="./assets/Logo_Hackathon.png">
          <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
         </b-col>
       </b-row>
