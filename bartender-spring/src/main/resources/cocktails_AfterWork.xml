@@ -43,7 +43,7 @@
 	    <listIngredients>Weißer Rum</listIngredients>
 	    <listIngredients>Ananassaft</listIngredients>
 	    <listIngredients>Kokossirup</listIngredients>
-	    <listIngredients>Garnitur: Ananas</listIngredients>
+	    <listIngredients>Ananas</listIngredients>
 	  </listIngredients>
 	  <rekognitionResult/>
 	</Cocktail>
@@ -59,7 +59,7 @@
 	    <listIngredients>Kokossirup</listIngredients>
 	    <listIngredients>Ananassaft</listIngredients>
 	    <listIngredients>Orangensaft</listIngredients>
-	    <listIngredients>Garnitur: Ananas</listIngredients>
+	    <listIngredients>Ananas</listIngredients>
 	  </listIngredients>
 	  <rekognitionResult/>
 	</Cocktail>
