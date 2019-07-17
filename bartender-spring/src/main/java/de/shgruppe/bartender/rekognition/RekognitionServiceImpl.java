@@ -71,7 +71,7 @@ public class RekognitionServiceImpl implements RekognitionService {
 
       //Map Response to Rekognition Result
       RekognitionResult rekognitionResult = new RekognitionResult();
-      
+
       if (!faces.isEmpty()) {
         Integer high = faces.get(0).getAgeRange().getHigh();
         Integer low = faces.get(0).getAgeRange().getLow();
@@ -114,11 +114,12 @@ public class RekognitionServiceImpl implements RekognitionService {
         rekognitionResult.setEmotions(weightedEmotionsList);
         rekognitionResult.setAge(alter);
         rekognitionResult.setFaceList(faces);
-        rekognitionResult.setLabelList(labels);
-      } else {
+      }
+      else {
         throw new Exception("Kein Gesicht erkannt");
       }
-     
+      rekognitionResult.setLabelList(labels);
+
       return rekognitionResult;
   } catch (AmazonRekognitionException e) {
       e.printStackTrace();
