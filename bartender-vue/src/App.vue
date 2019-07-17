@@ -3,11 +3,11 @@
     <b-container fluid>
       <b-row>
         <b-col>
+          <img id="logo" src="assets/Logo_Hackathon.png">
          <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
         </b-col>
       </b-row>
       <b-row class="content">
-        <!--<img alt="Vue logo" src="./assets/strand.jpg"> -->
         <b-col xs="12" lg="6">
           <Webcam msg="Mache ein Bild von Dir!" @cocktailFound="updateCocktail"/>
         </b-col>
@@ -51,6 +51,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+}
+#logo{
+  float: left;
+  margin-top: 10px;
 }
 h1 {
   padding-bottom: 30px;
