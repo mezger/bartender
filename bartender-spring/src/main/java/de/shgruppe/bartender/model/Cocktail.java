@@ -19,6 +19,12 @@ public class Cocktail
 	{}
 
 
+	public Cocktail(Cocktail cocktail)
+	{
+		this(cocktail.getId(), cocktail.getName(), cocktail.getZubereitung(), cocktail.getImage(), cocktail.getEmotion(), cocktail.isAlkoholisch(), cocktail.getListIngredients());
+	}
+
+
 	public Cocktail(String id, String name, String zubereitung, String image, String emotion, boolean alkoholisch, List<String> listIngredients)
 	{
 		super();

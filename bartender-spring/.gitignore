@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### Smart bartender ###
-/src/main/resources/bartender.properties
+/src/main/resources/bartender*.properties

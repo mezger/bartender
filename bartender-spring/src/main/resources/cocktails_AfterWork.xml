@@ -1,0 +1,129 @@
+<Cocktails>
+	<Cocktail>
+	  <id>1</id>
+	  <name>Caipirinha</name>
+	  <zubereitung>Limetten waschen und achteln. 4 Achtel Limetten mit einem Esslöffel Rohrzucker in einem Glas zerdrücken. Limettensirup hinzufügen. Mit Crushed Ice auffüllen und Cachaca darüberleeren. Umrühren.</zubereitung>
+	  <image>caipi.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Limette</listIngredients>
+	    <listIngredients>Rohrzucker</listIngredients>
+	    <listIngredients>Limettensirup</listIngredients>
+	    <listIngredients>Curshed Ice</listIngredients>
+	    <listIngredients>Cachaca</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>2</id>
+	  <name>Ipanema</name>
+	  <zubereitung>Limetten waschen und achteln. 4 Achtel Limetten mit einem Esslöffel Rohrzucker in einem Glas zerdrücken. Limettensirup hinzufügen. Mit Crushed Ice auffüllen und Ginger Ale darüberleeren. Umrühren.</zubereitung>
+	  <image>caipi.jpg</image>
+	  <emotion/>
+	  <alkoholisch>false</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Limette</listIngredients>
+	    <listIngredients>Rohrzucker</listIngredients>
+	    <listIngredients>Limettensirup</listIngredients>
+	    <listIngredients>Curshed Ice</listIngredients>
+	    <listIngredients>Ginger Ale</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>3</id>
+	  <name>Pina Colada</name>
+	  <zubereitung>Alle Zutaten in einen Cocktailmixer geben und ordentlich schütteln. Mischung in ein Glas geben und mit Ananas garnieren.</zubereitung>
+	  <image>pina_colada.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Eiswürfel</listIngredients>
+	    <listIngredients>Weißer Rum</listIngredients>
+	    <listIngredients>Ananassaft</listIngredients>
+	    <listIngredients>Kokossirup</listIngredients>
+	    <listIngredients>Garnitur: Ananas</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>4</id>
+	  <name>Virgin Colada</name>
+	  <zubereitung>Alle Zutaten in einen Cocktailmixer geben und ordentlich schütteln. Mischung in ein Glas geben und mit Ananas garnieren.</zubereitung>
+	  <image>pina_colada.jpg</image>
+	  <emotion/>
+	  <alkoholisch>false</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Eiswürfel</listIngredients>
+	    <listIngredients>Kokossirup</listIngredients>
+	    <listIngredients>Ananassaft</listIngredients>
+	    <listIngredients>Orangensaft</listIngredients>
+	    <listIngredients>Garnitur: Ananas</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>5</id>
+	  <name>Himber Slush mit Wodka</name>
+	  <zubereitung>Alle Zutaten in einen Cocktailmixer geben und ordentlich schütteln. Mischung in ein Glas geben und mit Limette garnieren.</zubereitung>
+	  <image>slush.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Himbeer Slush</listIngredients>
+	    <listIngredients>Wodka</listIngredients>
+	    <listIngredients>Limettensaft</listIngredients>
+	    <listIngredients>Garnitur: Limette</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>6</id>
+	  <name>Pils</name>
+	  <zubereitung>Pils innerhalb 7 Minuten in ein hohes Bierglas einlaufen lassen.</zubereitung>
+	  <image>pils.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Pils</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>7</id>
+	  <name>Hefeweizen</name>
+	  <zubereitung>95% des Hefeweizen in ein schlankes hohes Bierglas einfüllen. Rest in Flasche schwenken und mit Hefe ins Glas geben.</zubereitung>
+	  <image>hefeweizen.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Hefeweizen</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>8</id>
+	  <name>Export</name>
+	  <zubereitung>Bier in ein großes Glas geben (mindestens 0,5 Liter). Wir mischen nichts in unser Bier!</zubereitung>
+	  <image>export.jpg</image>
+	  <emotion/>
+	  <alkoholisch>true</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Export</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+	<Cocktail>
+	  <id>9</id>
+	  <name>Alkoholfreies Bier</name>
+	  <zubereitung>Alkoholfreies Bier in ein Glas geben.</zubereitung>
+	  <image>export.jpg</image>
+	  <emotion/>
+	  <alkoholisch>false</alkoholisch>
+	  <listIngredients>
+	    <listIngredients>Alkoholfreies Bier</listIngredients>
+	  </listIngredients>
+	  <rekognitionResult/>
+	</Cocktail>
+</Cocktails>
