@@ -1,7 +1,7 @@
 Limette;Limette;CONFUSED;no
 Rohrzucker;Rohrzucker;SURPRISED;no
 Limettensirup;Limettensirup;CALM;no
-Crushed Ice;Crushed Ice;SAD;no
+Crushed Ice;Crushed Ice;HAPPY;no
 Cachaca;Cachaca;DISGUSTED;yes
 Eiswürfel;Eiswürfel;HAPPY;no
 Weißer Rum;Weißer Rum;ANGRY;yes
@@ -15,5 +15,5 @@ Limettensaft;Limettensaft;ANGRY;no
 Orangensaft;Orangensaft;CONFUSED;no
 Pils;Pils;SURPRISED;yes
 Hefeweizen;Hefeweizen;HAPPY;yes
-Export;Export;CALM;yes
+Export;Export;SAD;yes
 Alkoholfreies Bier;Alkoholfreies Bier;CONFUSED;no
