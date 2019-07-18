@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <img id="logo" src="assets/Logo_Hackathon.png">
+          <img id="logo" src="./assets/Logo_Hackathon.png">
          <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
         </b-col>
       </b-row>
@@ -54,7 +54,7 @@ export default {
 }
 #logo{
   float: left;
-  margin-top: 10px;
+  padding-top: 30px;
 }
 h1 {
   padding-bottom: 30px;
@@ -71,4 +71,10 @@ h1 {
   .content > .col-lg-6{
     padding-top: 15px;
   }
+
+@media only screen and (min-width: 960px) {
+  #logo{
+    padding-top: 10px;
+  }
+}
 </style>

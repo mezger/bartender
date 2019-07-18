@@ -1,9 +1,10 @@
 <template>
   <div v-if="cocktail.name">
-    <p class="result">Nachdem Du gerade<br><strong>{{ cocktail.emotion }}</strong><br>bist,
-    </p>
+    <div class="result">
+      Du bist gerade: <div id="emotion">{ cocktail.emotion }}</div>
+    </div>
     <p class="result">
-      empfehlen wir Dir einen
+      Wir empfehlen dir einen
     </p>
     <p>
       <img v-bind:src="cocktail.image" v-bind:title="cocktail.name" v-bind:alt="cocktail.name" width="50%"/>
@@ -39,14 +40,14 @@ export default {
 
 <style scoped>
 .result {
-  font-size: 1.5em;
+  font-size: 1.2em;
   }
-.result strong {
-  font-size: 2em;
-}
 #collapse-cocktail{
   background-color: #fff;
 }
-
+#emotion{
+  display: inline-block;
+  font-weight: bold;
+}
 </style>
 
