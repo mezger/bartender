@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <img id="logo" src="./assets/Logo_Hackathon.png">
-         <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
+         <h1>Smart Bartender - Cocktail passend zu Deiner Stimmung</h1>
         </b-col>
       </b-row>
       <b-row class="content">
@@ -57,9 +57,9 @@ export default {
   margin-top: 10px;
 }
 h1 {
-  padding-bottom: 30px;
-  padding-top: 30px;
-  font-size: 3.5rem;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 2.5rem;
 }
 .container-fluid {
   padding-bottom: 10%;
