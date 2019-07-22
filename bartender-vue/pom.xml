@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -11,33 +11,34 @@
   <description>Cocktails passend zur Stimmung - Client</description>
 
   <properties>
+    <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
     <frontend-maven-plugin.version>1.7.5</frontend-maven-plugin.version>
   </properties>
 
   <build>
     <plugins>
-    <plugin>
-      <artifactId>maven-resources-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>copy Vue.js frontend content</id>
-          <phase>generate-resources</phase>
-          <goals>
-            <goal>copy-resources</goal>
-          </goals>
-          <configuration>
-            <outputDirectory>src/main/resources/public</outputDirectory>
-            <overwrite>true</overwrite>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/dist</directory>
-              </resource>
-            </resources>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy Vue.js frontend content</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>src/main/resources/public</directory>
+                  </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
@@ -49,8 +50,8 @@
               <goal>install-node-and-npm</goal>
             </goals>
             <configuration>
-			   <nodeVersion>v10.16.0</nodeVersion>
-			  <downloadRoot>http://nodejs.org/dist/</downloadRoot>
+              <nodeVersion>v10.16.0</nodeVersion>
+              <downloadRoot>http://nodejs.org/dist/</downloadRoot>
             </configuration>
           </execution>
           <execution>

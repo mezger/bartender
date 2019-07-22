@@ -57,9 +57,9 @@ export default {
   padding-top: 30px;
 }
 h1 {
-  padding-bottom: 30px;
-  padding-top: 30px;
-  font-size: 3.5rem;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-size: 2.5rem;
 }
 .container-fluid {
   padding-bottom: 10%;
