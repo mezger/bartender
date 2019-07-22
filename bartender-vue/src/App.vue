@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <img id="logo" src="./assets/Logo_Hackathon.png">
-         <h1>Bartender - Cocktail passend zu Deiner Stimmung</h1>
+         <h1>Smart Bartender - Cocktail passend zu Deiner Stimmung</h1>
         </b-col>
       </b-row>
       <b-row class="content">
